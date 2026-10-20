@@ -14,7 +14,7 @@ categories:
         tag: El cerebro
         url: https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Sense-Pre-Soldered-p-6335.html
         description: Una placa diminuta con Wi-Fi, cámara y micrófono. Es el dispositivo físico que construiremos,
-          conectado por Wi-Fi a tu Raspberry.
+          conectado por Wi-Fi a mi Raspberry.
         uses:
         - Capturar imágenes para identificar objetos.
         - Escuchar órdenes de voz.
@@ -230,3 +230,18 @@ categories:
         - Coordinarse como supervivientes para escapar de la mansión.
         - Compartir una partida para 2–4 personas, de unos 30–45 minutos.
         note: Para mayores de 14 años. Precio orientativo sin envío.
+      - id: schotten-totten
+        name: Schotten Totten 2
+        subtitle: Edición en español · Para dos
+        store: SomosJuegos
+        price: 13.20
+        emoji: 🃏
+        glow: '#806f83'
+        tag: Duelo asimétrico
+        url: https://www.somosjuegos.com/producto/schotten-totten-2/
+        description: Duelo asimétrico de cartas en el que un jugador ataca un castillo y el otro lo defiende creando formaciones de tropas.
+        uses:
+        - Crear formaciones de tropas con las cartas.
+        - Atacar el castillo o defenderlo según el papel.
+        - Jugar un duelo de cartas para dos personas de unos 20 minutos.
+        note: Edición en español. Para 2 jugadores; partidas de unos 20 minutos. Precio orientativo sin envío.

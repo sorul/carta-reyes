@@ -18,7 +18,7 @@ class CatalogBuildTests(unittest.TestCase):
             ["xiao", "expansion", "solder", "pins", "amp", "grove", "speaker",
              "breadboard", "jumpers", "components", "usb"],
         )
-        self.assertEqual(len(items), 14)
+        self.assertEqual(len(items), 15)
         self.assertEqual(
             [(item["categoryId"], item["categoryName"]) for item in items if item["id"] == "el-bucle"],
             [("libros", "Libros")],
@@ -38,6 +38,12 @@ class CatalogBuildTests(unittest.TestCase):
                          ("juegos", "Juegos", "TerrorScape"))
         self.assertEqual((game["store"], game["price"], game["url"]),
                          ("Ocio Central", 89.95, "https://ociocentral.com/juegos-mesa/1683--terrorscape-castellano.html"))
+        card_game = next(item for item in items if item["id"] == "schotten-totten")
+        self.assertEqual((card_game["categoryId"], card_game["categoryName"], card_game["name"]),
+                         ("juegos", "Juegos", "Schotten Totten 2"))
+        self.assertEqual((card_game["subtitle"], card_game["store"], card_game["price"], card_game["url"]),
+                         ("Edición en español · Para dos", "SomosJuegos", 13.20,
+                          "https://www.somosjuegos.com/producto/schotten-totten-2/"))
 
     def test_budget_summary_uses_only_dynamic_catalog_total(self):
         items = build.load_catalog(ROOT / "catalogo.yaml")
