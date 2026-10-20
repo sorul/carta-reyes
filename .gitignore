@@ -1,3 +1,6 @@
 dist/
 __pycache__/
 *.py[cod]
+.atl/
+*.zip
+odd/
