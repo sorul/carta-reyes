@@ -30,12 +30,12 @@ El HTML generado es autónomo y puede publicarse bajo una ruta de repositorio de
 
 ## Publicar en GitHub Pages
 
-1. Crea un repositorio público llamado `carta-reyes-2027`.
+1. Crea un repositorio público llamado `carta-reyes`.
 2. Sube los archivos fuente (`index.html`, `catalogo.yaml`, `scripts/`, `tests/`, `requirements.txt` y `.github/workflows/pages.yml`) a la rama actual `master` o a `main`.
 3. En GitHub abre **Settings > Pages**.
 4. En **Build and deployment**, selecciona **GitHub Actions** como origen.
 5. El workflow ejecuta las pruebas, genera `dist/` y publica ese artefacto al hacer push a `master` o `main`.
-6. La URL tendrá el formato `https://USUARIO.github.io/carta-reyes-2027/`.
+6. La URL tendrá el formato `https://USUARIO.github.io/carta-reyes/`.
 
 ## Funcionalidades
 
