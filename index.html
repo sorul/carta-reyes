@@ -243,7 +243,7 @@
       border-radius: 18px;
       padding: 22px 30px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 15px;
       margin-bottom: 75px
     }
@@ -832,10 +832,8 @@
       <section class="summary" aria-label="Resumen de presupuesto">
         <div><span class="stat-label">Mi carta tiene</span><span class="stat-num" id="count"></span><span
             class="stat-note">Piezas, herramientas y accesorios</span></div>
-        <div><span class="stat-label">Materiales aprox.</span><span class="stat-num" id="total">73 €</span><span
+        <div><span class="stat-label">Total sin envío</span><span class="stat-num" id="total"></span><span
             class="stat-note">Sin gastos de envío</span></div>
-        <div><span class="stat-label">Total con envíos aprox.</span><span class="stat-num">110–130 €</span><span
-            class="stat-note">Estimación según proveedores.</span></div>
       </section>
       <section class="section" id="regalos">
         <div class="heading">
@@ -856,9 +854,9 @@
       <section class="section" id="proyectos">
         <div class="heading">
           <div>
-            <div class="eyebrow">El gran plan</div>
+            <div class="eyebrow">El gran plan de Inventos</div>
             <h2>¿Y esto para qué es?</h2>
-            <p>No son piezas al azar: juntas permiten construir estos tres proyectos, de menor a mayor complejidad.</p>
+            <p>Los regalos de la categoría «Inventos» no son piezas al azar: juntos permiten construir estos tres proyectos, de menor a mayor complejidad.</p>
           </div>
         </div>
         <div class="explain">
@@ -881,8 +879,7 @@
         </div>
       </section>
     </main>
-    <footer class="footer"><span>✦ Hecho con ilusión, cables y un poquito de IA · Reyes 2027</span><span>La Raspberry Pi
-        5 ya está en casa · El multímetro también ✓</span></footer>
+    <footer class="footer"><span>✦ Hecho con ilusión, cables y un poquito de IA · Reyes 2027</span></footer>
   </div>
   <dialog id="details" aria-labelledby="modal-title">
     <div class="modal-inner">

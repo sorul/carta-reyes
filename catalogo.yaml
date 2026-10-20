@@ -174,3 +174,59 @@ categories:
         - Alimentarla durante las pruebas.
         - Consultar mensajes de diagnóstico por USB.
         note: Si ya hay un cable USB-C que transmite datos, este artículo es opcional.
+
+  - id: libros
+    name: Libros
+    emoji: 📚
+    items:
+      - id: el-bucle
+        name: El bucle
+        subtitle: Novela interactiva
+        store: Casa del Libro
+        price: 22.70
+        emoji: 📖
+        glow: '#7c719c'
+        tag: Misterio interactivo
+        url: https://www.casadellibro.com/libro-el-bucle/9791387869229/17465315
+        description: Novela interactiva de misterio en la que el mismo día se repite mientras investigas pistas y resuelves el enigma.
+        uses:
+        - Investigar pistas para descubrir por qué se repite el día.
+        - Resolver el puzle central siguiendo una historia interactiva.
+        - Anotar hallazgos en el cuaderno de investigación y consultar el mapa incluido.
+        note: Edición en tapa dura, ISBN 9791387869229. Precio orientativo sujeto a cambios.
+
+  - id: juegos
+    name: Juegos
+    emoji: 🎲
+    items:
+      - id: addison-sign
+        name: Addison Sign
+        subtitle: Hanayama · The Legend of Zelda
+        store: Los Mundos de Rubik
+        price: 24.95
+        emoji: 🪧
+        glow: '#7e987f'
+        tag: Reto de ingenio
+        url: https://www.losmundosderubik.es/es/nivel-6/3055-hanayama-huzzle-cast-the-legend-of-zelda-addison-sign-5407005151426.html
+        description: >-
+          Esta colaboración de Hanayama con The Legend of Zelda se inspira en el minijuego del cartel de Addison en Tears of the Kingdom: hay que usar cuatro palos y encontrar una solución para mantener el cartel en pie sin ayuda.
+        uses:
+        - Probar distintas formas de apoyar el cartel sin que nadie lo sostenga.
+        - Explorar las varias soluciones posibles con las cuatro varillas.
+        - Ejercitar la lógica espacial mientras resuelves el reto.
+        note: Precio orientativo; tiene varias soluciones posibles.
+      - id: terrorscape
+        name: TerrorScape
+        subtitle: Edición en castellano
+        store: Ocio Central
+        price: 89.95
+        emoji: 🏚️
+        glow: '#876e78'
+        tag: Terror asimétrico
+        url: https://ociocentral.com/juegos-mesa/1683--terrorscape-castellano.html
+        description: Juego de mesa de terror asimétrico en el que una persona juega como el asesino y las demás, como supervivientes que tratan de escapar de la mansión.
+        uses:
+        - Jugar como asesino frente al grupo de supervivientes.
+        - Coordinarse como supervivientes para escapar de la mansión.
+        - Compartir una partida para 2–4 personas, de unos 30–45 minutos.
+        note: Para mayores de 14 años. Precio orientativo sin envío.

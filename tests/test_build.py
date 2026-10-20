@@ -14,12 +14,40 @@ class CatalogBuildTests(unittest.TestCase):
     def test_existing_catalog_has_all_original_gifts(self):
         items = build.load_catalog(ROOT / "catalogo.yaml")
         self.assertEqual(
-            [item["id"] for item in items],
+            [item["id"] for item in items if item["categoryId"] == "inventos"],
             ["xiao", "expansion", "solder", "pins", "amp", "grove", "speaker",
              "breadboard", "jumpers", "components", "usb"],
         )
-        self.assertEqual(len(items), 11)
-        self.assertTrue(all(item["categoryName"] == "Inventos" for item in items))
+        self.assertEqual(len(items), 14)
+        self.assertEqual(
+            [(item["categoryId"], item["categoryName"]) for item in items if item["id"] == "el-bucle"],
+            [("libros", "Libros")],
+        )
+        book = next(item for item in items if item["id"] == "el-bucle")
+        self.assertEqual((book["name"], book["store"], book["price"]),
+                         ("El bucle", "Casa del Libro", 22.70))
+        self.assertEqual(book["url"], "https://www.casadellibro.com/libro-el-bucle/9791387869229/17465315")
+        puzzle = next(item for item in items if item["id"] == "addison-sign")
+        self.assertEqual((puzzle["categoryId"], puzzle["categoryName"], puzzle["name"]),
+                         ("juegos", "Juegos", "Addison Sign"))
+        self.assertEqual((puzzle["emoji"], puzzle["store"], puzzle["price"]),
+                         ("🪧", "Los Mundos de Rubik", 24.95))
+        self.assertEqual(puzzle["url"], "https://www.losmundosderubik.es/es/nivel-6/3055-hanayama-huzzle-cast-the-legend-of-zelda-addison-sign-5407005151426.html")
+        game = next(item for item in items if item["id"] == "terrorscape")
+        self.assertEqual((game["categoryId"], game["categoryName"], game["name"]),
+                         ("juegos", "Juegos", "TerrorScape"))
+        self.assertEqual((game["store"], game["price"], game["url"]),
+                         ("Ocio Central", 89.95, "https://ociocentral.com/juegos-mesa/1683--terrorscape-castellano.html"))
+
+    def test_budget_summary_uses_only_dynamic_catalog_total(self):
+        items = build.load_catalog(ROOT / "catalogo.yaml")
+        rendered = build.render_html(items, (ROOT / "index.html").read_text(encoding="utf-8"))
+        self.assertIn('class="stat-label">Total sin envío</span>', rendered)
+        self.assertNotIn("Total con envíos aprox.", rendered)
+        self.assertNotIn("110–130 €", rendered)
+        self.assertNotIn('id="total">73 €', rendered)
+        self.assertIn("items.reduce((sum, i) => sum + i.price, 0)", rendered)
+        self.assertNotIn("visible.reduce((sum, i) => sum + i.price", rendered)
 
     def test_added_and_removed_items_drive_filters_and_totals(self):
         items = build.load_catalog(ROOT / "catalogo.yaml")

@@ -23,19 +23,14 @@ Los IDs de regalos deben ser únicos en todo el catálogo, incluso entre categor
 
 1. Instala Python 3.12 o posterior.
 2. Instala la dependencia fijada: `python3 -m pip install -r requirements.txt`.
-3. Ejecuta `python3 -m unittest discover -s tests -v` y `python3 scripts/build.py`.
+3. Ejecuta `python3 -m unittest discover -s tests -v` y `make build`.
 4. Abre `dist/index.html` en un navegador para revisar el sitio generado.
 
-El HTML generado es autónomo y puede publicarse bajo una ruta de repositorio de GitHub Pages. El navegador no necesita cargar YAML ni ejecutar un backend.
+El HTML generado es autónomo; el navegador no necesita cargar YAML ni ejecutar un backend.
 
-## Publicar en GitHub Pages
+## Sitio publicado
 
-1. Crea un repositorio público llamado `carta-reyes`.
-2. Sube los archivos fuente (`index.html`, `catalogo.yaml`, `scripts/`, `tests/`, `requirements.txt` y `.github/workflows/pages.yml`) a la rama actual `master` o a `main`.
-3. En GitHub abre **Settings > Pages**.
-4. En **Build and deployment**, selecciona **GitHub Actions** como origen.
-5. El workflow ejecuta las pruebas, genera `dist/` y publica ese artefacto al hacer push a `master` o `main`.
-6. La URL tendrá el formato `https://USUARIO.github.io/carta-reyes/`.
+[https://sorul.github.io/carta-reyes/](https://sorul.github.io/carta-reyes/)
 
 ## Funcionalidades
 
