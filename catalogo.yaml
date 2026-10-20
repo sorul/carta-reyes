@@ -1,0 +1,176 @@
+# Catálogo de regalos. Editá las categorías y sus artículos; el sitio se genera con scripts/build.py.
+categories:
+  - id: inventos
+    name: Inventos
+    emoji: 🧪
+    items:
+      - id: xiao
+        name: XIAO ESP32-S3 Sense
+        subtitle: Versión Pre-Soldered
+        store: Seeed Studio
+        price: 14
+        emoji: 📸
+        glow: '#668d73'
+        tag: El cerebro
+        url: https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Sense-Pre-Soldered-p-6335.html
+        description: Una placa diminuta con Wi-Fi, cámara y micrófono. Es el dispositivo físico que construiremos,
+          conectado por Wi-Fi a tu Raspberry.
+        uses:
+        - Capturar imágenes para identificar objetos.
+        - Escuchar órdenes de voz.
+        - Comunicar el dispositivo con la Raspberry por Wi-Fi.
+        note: Elegir expresamente la variante con pines presoldados.
+      - id: expansion
+        name: Expansion Board OLED
+        subtitle: Para Seeed XIAO
+        store: Seeed Studio
+        price: 14
+        emoji: 🖥️
+        glow: '#6d788f'
+        tag: Pantalla incluida
+        url: https://www.seeedstudio.com/Seeeduino-XIAO-Expansion-board-p-4746.html
+        description: La base donde encajará la XIAO. Incorpora una pequeña pantalla y conectores que facilitan
+          los experimentos.
+        uses:
+        - Mostrar mensajes y estados del asistente.
+        - Montar la placa principal sin soldarla.
+        - Conectar nuevos módulos y probar ideas.
+        note: La pantalla no es táctil.
+      - id: solder
+        name: Kit de soldadura McPower LS-303
+        subtitle: Herramientas de aprendizaje
+        store: BerryBase
+        price: 13.9
+        emoji: 🛠️
+        glow: '#a8794d'
+        tag: Reutilizable
+        url: https://www.berrybase.de/4-teiliges-loetset-ls-303-bestehend-aus-30w-loetkolben-entloetpumpe-loetkolbenstaender-loetzinn
+        description: Un pequeño kit para aprender a unir componentes eléctricos. Lo usaremos solo donde no exista
+          una alternativa cómoda sin soldadura.
+        uses:
+        - Soldar los pines del módulo de audio si no vienen instalados.
+        - Aprender una habilidad útil para futuros inventos.
+        - Hacer conexiones duraderas en otros proyectos.
+        note: Requiere una superficie de trabajo segura, ventilación y supervisar la temperatura.
+      - id: pins
+        name: Tira de pines macho 2,54 mm
+        subtitle: Conector recortable
+        store: BerryBase
+        price: 2.5
+        emoji: 🪡
+        glow: '#6b8b95'
+        tag: Conexiones
+        url: https://www.berrybase.de/es/stiftleiste-18mm-40-polig-rm-2-54-gerade
+        description: Una tira de pequeños contactos metálicos que se recortan a la cantidad necesaria para el
+          amplificador.
+        uses:
+        - Instalar los contactos del amplificador.
+        - Conectarlo a la protoboard.
+        - Reutilizar sobrantes en otros experimentos.
+        note: Precio estimado. Comprobar que la tira tenga paso de 2,54 mm.
+      - id: amp
+        name: DFRobot DFR0954
+        subtitle: Amplificador de audio I2S
+        store: Farnell
+        price: 5.31
+        emoji: 🔊
+        glow: '#b28a61'
+        tag: Para la voz
+        url: https://es.farnell.com/dfrobot/dfr0954/amplifier-mod-class-d-audio-amplifier/dp/4308198
+        description: Transforma el audio digital de la XIAO en una señal capaz de mover un altavoz.
+        uses:
+        - Hacer que el asistente responda hablando.
+        - Conectar el altavoz mediante el conector PH2.0.
+        - Aprender el funcionamiento del audio digital I2S.
+        note: Puede requerir soldar los pines de conexión.
+      - id: grove
+        name: Cables Grove a Dupont (5)
+        subtitle: Conectores macho, 4 pines
+        store: Farnell
+        price: 4.34
+        emoji: 🧵
+        glow: '#717cab'
+        tag: Conexiones
+        url: https://es.farnell.com/seeed-studio/110990210/cable-4-pin-male-jumper-grove/dp/3410135
+        description: Adaptan los conectores Grove de la expansión a cables que podemos insertar en una protoboard.
+        uses:
+        - Sacar señales de la base XIAO sin soldarla.
+        - Llevar señales y alimentación a los circuitos.
+        - Cambiar conexiones durante las pruebas.
+        note: Es el paquete con extremos macho, distinto al modelo hembra.
+      - id: speaker
+        name: Altavoz mono 3 W / 4 Ω
+        subtitle: Conector JST-PH
+        store: Tiendatec
+        price: 4.95
+        emoji: 🎵
+        glow: '#a17d76'
+        tag: Para la voz
+        url: https://www.tiendatec.es/electronica/componentes/altavoces/1208-altavoz-mono-3w-4ohm-conector-jst-ph-8472496016704.html
+        description: Es la pequeña voz física del asistente. Se conectará al módulo amplificador.
+        uses:
+        - Escuchar las respuestas habladas.
+        - Reproducir señales y avisos del dispositivo.
+        - Probar el circuito de sonido.
+        note: Comprobar polaridad y formato real del conector antes de encender.
+      - id: breadboard
+        name: Protoboard de 400 puntos
+        subtitle: Placa de pruebas
+        store: Tiendatec
+        price: 2.95
+        emoji: 🎛️
+        glow: '#8a9181'
+        tag: Sin soldadura
+        url: https://www.tiendatec.es/electronica/placas-de-prototipo/protoboards/48-placa-de-prototipos-de-400-puntos-blanca-8400480010018.html
+        description: Una base con agujeros para montar y modificar circuitos sin necesidad de soldar cada conexión.
+        uses:
+        - Montar el amplificador y cables.
+        - Probar circuitos antes de hacerlos permanentes.
+        - Reutilizarla en infinidad de experimentos.
+        note: Los contactos internos están conectados por grupos.
+      - id: jumpers
+        name: Cables Dupont variados
+        subtitle: Puentes de protoboard
+        store: Tiendatec
+        price: 3.75
+        emoji: 〰️
+        glow: '#6d9383'
+        tag: Conexiones
+        url: https://www.tiendatec.es/electronica/placas-de-prototipo/cables-de-puentear/51-pack-cables-dupont-para-puentear-en-placa-de-prototipo-protoboard-breadboard-8400510010018.html
+        description: Cables de colores para unir componentes, puntos de alimentación y señales.
+        uses:
+        - Unir la placa de pruebas y el amplificador.
+        - Experimentar con circuitos nuevos.
+        - Desmontar y reutilizar sin soldadura.
+        note: Comprobar que el surtido incluya los extremos requeridos.
+      - id: components
+        name: Kit básico de componentes
+        subtitle: LED, resistencias y más
+        store: Tiendatec
+        price: 4.95
+        emoji: 💡
+        glow: '#b2a56b'
+        tag: Para aprender
+        url: https://www.tiendatec.es/electronica/accesorios/1578-kit-componentes-basicos-electronica-8472496021005.html
+        description: Pequeñas piezas para aprender electrónica de forma guiada, desde un LED que se enciende
+          hasta pequeños circuitos.
+        uses:
+        - Experimentar con LED y resistencias.
+        - Aprender a medir y diagnosticar circuitos.
+        - Inventar funciones nuevas para el asistente.
+        note: 'Material complementario: no es imprescindible para los primeros dos proyectos.'
+      - id: usb
+        name: Cable USB-C de datos
+        subtitle: Para programar y alimentar
+        store: Tiendatec
+        price: 3.95
+        emoji: 🔌
+        glow: '#7a91aa'
+        tag: Alimentación
+        url: https://www.tiendatec.es/informatica/cablesadaptadores/usb/1284-cable-usb-3-usb-a-m-usb-c-1-metro-blanco-8472496017220.html
+        description: Conecta la XIAO al ordenador para grabar programas y alimentarla durante el desarrollo.
+        uses:
+        - Programar la placa ESP32-S3.
+        - Alimentarla durante las pruebas.
+        - Consultar mensajes de diagnóstico por USB.
+        note: Si ya hay un cable USB-C que transmite datos, este artículo es opcional.

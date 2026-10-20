@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101b27" />
+  <meta name="description"
+    content="Mi carta de Reyes 2027: un laboratorio de electrónica e inteligencia artificial para montar en casa." />
+  <title>Mi laboratorio mágico · Carta de Reyes 2027</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,750&display=swap');
+
+    :root {
+      --bg: #101b27;
+      --surface: #1a2b36;
+      --surface2: #213642;
+      --line: #3a5057;
+      --cream: #faf0db;
+      --muted: #acb9b7;
+      --gold: #efc77c;
+      --mint: #a2d5bf;
+      --coral: #ef9c89
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--cream);
+      font: 15px/1.6 'DM Sans', system-ui, sans-serif
+    }
+
+    button,
+    a {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    a {
+      color: inherit
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .38;
+      background-image: radial-gradient(#fbf2d7 1px, transparent 1px), radial-gradient(#c1dcd2 1px, transparent 1px);
+      background-size: 99px 107px, 143px 173px;
+      background-position: 10px 16px, 60px 50px;
+      mask-image: linear-gradient(#000, transparent 90%)
+    }
+
+    .wrap {
+      width: min(1140px, calc(100% - 40px));
+      margin: auto;
+      position: relative
+    }
+
+    .topbar {
+      padding: 25px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: .02em
+    }
+
+    .logo .logo-icon {
+      width: 37px;
+      height: 37px;
+      border: 1px solid #a1c5b2;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--mint)
+    }
+
+    .year {
+      font-size: 11px;
+      letter-spacing: .18em;
+      color: var(--gold);
+      text-transform: uppercase
+    }
+
+    .pill,
+    .btn {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--cream);
+      padding: 10px 16px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: .2s
+    }
+
+    .pill:hover,
+    .btn:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px)
+    }
+
+    .btn.primary {
+      background: var(--gold);
+      color: #192730;
+      border-color: var(--gold);
+      font-weight: 700
+    }
+
+    .btn.small {
+      padding: 8px 13px;
+      font-size: 12px
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 35px;
+      align-items: center;
+      padding: 58px 0 75px
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--mint);
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .hero h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(45px, 7vw, 86px);
+      font-weight: 650;
+      letter-spacing: -.045em;
+      line-height: 1.03;
+      margin: 21px 0 22px
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold)
+    }
+
+    .hero p {
+      max-width: 550px;
+      color: #c6d0ca;
+      font-size: 17px
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 31px
+    }
+
+    .orb {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      max-width: 390px;
+      margin: auto;
+      width: 100%;
+      background: radial-gradient(circle at 40% 38%, #527769 0%, #273d45 39%, #182b36 70%);
+      border: 1px solid #56736d;
+      box-shadow: 0 0 0 18px #ffffff05, 0 0 0 46px #ffffff03, inset 0 0 70px #0a1624;
+      position: relative;
+      display: grid;
+      place-items: center
+    }
+
+    .orb:before,
+    .orb:after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold);
+      font-size: 28px
+    }
+
+    .orb:before {
+      top: 8%;
+      left: 4%
+    }
+
+    .orb:after {
+      bottom: 12%;
+      right: 2%;
+      font-size: 19px
+    }
+
+    .orb-art {
+      font-size: clamp(95px, 16vw, 190px);
+      filter: drop-shadow(0 18px 10px #0007);
+      transform: rotate(-8deg)
+    }
+
+    .orbit-label {
+      position: absolute;
+      top: 13%;
+      right: -7%;
+      background: var(--cream);
+      color: #20333b;
+      padding: 10px 14px;
+      border-radius: 7px;
+      transform: rotate(8deg);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 25px #0005
+    }
+
+    .summary {
+      border: 1px solid #466359;
+      background: linear-gradient(120deg, #233d3f, #1b3039);
+      border-radius: 18px;
+      padding: 22px 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 75px
+    }
+
+    .stat-label {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 10px;
+      color: #adcfbf
+    }
+
+    .stat-num {
+      display: block;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 31px;
+      line-height: 1.5
+    }
+
+    .stat-note {
+      font-size: 12px;
+      color: #b8c9c2
+    }
+
+    .heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px
+    }
+
+    .heading h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 550;
+      letter-spacing: -.03em;
+      font-size: clamp(32px, 4vw, 46px);
+      margin: 6px 0
+    }
+
+    .heading p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 550px
+    }
+
+    .filterbar {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin: 0 0 25px
+    }
+
+    .chip {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 9px 15px;
+      border-radius: 100px
+    }
+
+    .chip.active {
+      background: var(--cream);
+      border-color: var(--cream);
+      color: #14242e;
+      font-weight: 700
+    }
+
+    .category-nav {
+      display: flex;
+      gap: 10px;
+      margin: 4px 0 28px;
+      overflow-x: auto;
+      padding: 2px 2px 8px;
+      scrollbar-width: thin
+    }
+
+    .category-link {
+      align-items: center;
+      background: linear-gradient(135deg, #293e44, #1b3038);
+      border: 1px solid #52645c;
+      border-radius: 14px;
+      color: var(--cream);
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 10px;
+      min-height: 54px;
+      padding: 9px 15px;
+      text-decoration: none;
+      transition: border-color .2s, transform .2s
+    }
+
+    .category-link:hover { border-color: var(--cream); transform: translateY(-2px) }
+    .category-link[hidden] { display: none }
+    .category-link .category-icon { font-size: 23px }
+    .category-link .category-total { color: var(--muted); font-size: 12px }
+
+    .category-section {
+      background: linear-gradient(145deg, #1e333a99, #13262e66);
+      border: 1px solid #ffffff12;
+      border-radius: 22px;
+      margin: 0 0 20px;
+      padding: clamp(17px, 3vw, 28px)
+    }
+
+    .category-heading {
+      align-items: center;
+      display: flex;
+      gap: 14px;
+      margin: 0 0 20px
+    }
+
+    .category-heading .category-icon {
+      align-items: center;
+      background: #ffffff0c;
+      border: 1px solid #ffffff18;
+      border-radius: 15px;
+      display: flex;
+      flex: 0 0 54px;
+      font-size: 27px;
+      height: 54px;
+      justify-content: center
+    }
+
+    .category-heading h3 { font: 550 clamp(23px, 3vw, 30px) Fraunces, Georgia, serif; margin: 0 }
+    .category-heading p { color: var(--muted); font-size: 13px; margin: 4px 0 0 }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid #34474e;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: .2s
+    }
+
+    .card:hover {
+      border-color: #b3c3a7;
+      transform: translateY(-3px)
+    }
+
+    .art {
+      height: 185px;
+      background: radial-gradient(circle at 50% 47%, var(--glow), transparent 65%), linear-gradient(145deg, #293e44, #152832);
+      display: grid;
+      place-items: center;
+      position: relative
+    }
+
+    .art .emoji {
+      font-size: 83px;
+      filter: drop-shadow(0 12px 8px #0006);
+      transition: transform .2s
+    }
+
+    .card:hover .emoji {
+      transform: scale(1.08) rotate(-5deg)
+    }
+
+    .art .number {
+      position: absolute;
+      top: 17px;
+      left: 18px;
+      color: #ffffff88;
+      font-size: 11px;
+      letter-spacing: .1em
+    }
+
+    .art .category {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      color: #e9f0e5a8;
+      font-size: 10px;
+      letter-spacing: .13em;
+      text-transform: uppercase
+    }
+
+    .card-body {
+      padding: 20px 20px 17px;
+      flex: 1;
+      display: flex;
+      flex-direction: column
+    }
+
+    .card h3 {
+      font-size: 19px;
+      line-height: 1.3;
+      margin: 0 0 9px
+    }
+
+    .desc {
+      font-size: 13px;
+      color: #b5c3be;
+      line-height: 1.55;
+      flex: 1;
+      margin: 0 0 18px
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 17px
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold)
+    }
+
+    .tag {
+      font-size: 10px;
+      border: 1px solid #456255;
+      border-radius: 20px;
+      color: var(--mint);
+      padding: 3px 8px;
+      text-align: center
+    }
+
+    .card-links {
+      display: flex;
+      gap: 8px
+    }
+
+    .card-links .btn {
+      flex: 1;
+      font-size: 12px;
+      padding: 10px 7px
+    }
+
+    .card-links .btn.primary {
+      flex: 1.1
+    }
+
+    .bought {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      color: #a9bcb5;
+      font-size: 12px;
+      margin-top: 14px;
+      cursor: pointer
+    }
+
+    .bought input {
+      accent-color: var(--mint);
+      width: 16px;
+      height: 16px
+    }
+
+    .card.is-bought {
+      opacity: .57
+    }
+
+    .card.is-bought .art:after {
+      content: '✓ CONSEGUIDO';
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: #b5d7c0;
+      color: #16312b;
+      padding: 4px 9px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 700
+    }
+
+    .section {
+      margin-bottom: 85px
+    }
+
+    .explain {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px
+    }
+
+    .feature {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 25px;
+      background: #172935
+    }
+
+    .feature-icon {
+      font-size: 39px
+    }
+
+    .feature h3 {
+      margin: 13px 0 7px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 24px;
+      font-weight: 500
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0
+    }
+
+    .roadmap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      align-items: start
+    }
+
+    .step b {
+      width: 34px;
+      height: 34px;
+      flex: none;
+      border-radius: 50%;
+      background: #28403e;
+      color: var(--mint);
+      display: grid;
+      place-items: center
+    }
+
+    .step h3 {
+      margin: 0 0 3px;
+      font-size: 15px
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      margin-top: 90px;
+      padding: 28px 0 48px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    .note {
+      border-left: 3px solid var(--gold);
+      padding: 13px 20px;
+      background: #27333a;
+      border-radius: 0 10px 10px 0;
+      color: #cfdbd1;
+      font-size: 13px;
+      margin-top: 24px
+    }
+
+    dialog {
+      max-width: 530px;
+      width: calc(100% - 32px);
+      background: #1c3039;
+      color: var(--cream);
+      border: 1px solid #6b8177;
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: 0 20px 100px #000a
+    }
+
+    dialog::backdrop {
+      background: #07131bcb;
+      backdrop-filter: blur(5px)
+    }
+
+    .modal-inner {
+      padding: 29px
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: start
+    }
+
+    .modal-head h2 {
+      font: 550 31px Fraunces, Georgia, serif;
+      margin: 4px 0 15px
+    }
+
+    .modal-close {
+      border: 1px solid var(--line);
+      color: var(--cream);
+      background: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 21px
+    }
+
+    .modal-emoji {
+      font-size: 57px;
+      display: block;
+      margin: 12px 0
+    }
+
+    .modal-inner p {
+      color: #c0cfc8
+    }
+
+    .modal-inner ul {
+      color: #c0cfc8;
+      padding-left: 22px
+    }
+
+    .modal-inner li {
+      margin-bottom: 8px
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 23px;
+      flex-wrap: wrap
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%, 100px);
+      opacity: 0;
+      background: var(--cream);
+      color: #20313a;
+      padding: 11px 20px;
+      border-radius: 100px;
+      box-shadow: 0 15px 60px #0007;
+      transition: .3s;
+      z-index: 100
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1
+    }
+
+    @media(max-width:850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 35px 0 50px
+      }
+
+      .hero p {
+        margin: auto
+      }
+
+      .hero-actions {
+        justify-content: center
+      }
+
+      .orb {
+        width: min(70%, 300px)
+      }
+
+      .cards,
+      .explain {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .summary {
+        margin-bottom: 55px
+      }
+    }
+
+    @media(max-width:580px) {
+      .wrap {
+        width: min(100% - 28px, 1140px)
+      }
+
+      .topbar {
+        padding: 19px 0
+      }
+
+      .topbar .pill {
+        font-size: 11px;
+        padding: 9px
+      }
+
+      .hero h1 {
+        font-size: 49px
+      }
+
+      .orb {
+        width: 73%;
+        margin: 22px auto 8px
+      }
+
+      .summary {
+        padding: 16px;
+        gap: 6px
+      }
+
+      .stat-num {
+        font-size: 23px
+      }
+
+      .stat-label {
+        font-size: 9px
+      }
+
+      .stat-note {
+        font-size: 10px
+      }
+
+      .cards,
+      .explain {
+        grid-template-columns: 1fr
+      }
+
+      .heading {
+        display: block
+      }
+
+      .heading p {
+        margin-top: 8px
+      }
+
+      .art {
+        height: 180px
+      }
+
+      .footer {
+        flex-direction: column
+      }
+
+      .hero p {
+        font-size: 15px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="logo"><span class="logo-icon">✳</span><span>Laboratorio de Reyes<br><span class="year">Edición
+            2027</span></span></div><a class="pill" href="#regalos">Ver regalos ↓</a>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">✦ Queridos Reyes Magos (y Laura) ✦</div>
+          <h1>Este año quiero <em>crear magia.</em></h1>
+          <p>O, para ser más exactos, construir una cámara que reconozca objetos y un pequeño asistente con inteligencia
+            artificial. Esta es mi lista de piezas para convertir la idea en realidad. 🎄</p>
+          <div class="hero-actions"><a class="btn primary" href="#regalos">Explorar mi carta ↗</a><a class="btn"
+              href="#proyectos">¿Qué voy a construir?</a></div>
+        </div>
+        <div class="orb"><span class="orb-art" role="img" aria-label="Robot simpático">🤖</span><span
+            class="orbit-label">100% ilusión<br>+ un poco de estaño ✨</span></div>
+      </section>
+      <section class="summary" aria-label="Resumen de presupuesto">
+        <div><span class="stat-label">Mi carta tiene</span><span class="stat-num" id="count"></span><span
+            class="stat-note">Piezas, herramientas y accesorios</span></div>
+        <div><span class="stat-label">Materiales aprox.</span><span class="stat-num" id="total">73 €</span><span
+            class="stat-note">Sin portes ni posibles impuestos</span></div>
+        <div><span class="stat-label">Presupuesto flexible</span><span class="stat-num">160 €</span><span
+            class="stat-note">No hace falta gastarlo entero</span></div>
+      </section>
+      <section class="section" id="regalos">
+        <div class="heading">
+          <div>
+            <div class="eyebrow">La lista secreta</div>
+            <h2>Las piezas de la magia</h2>
+            <p>Pulsa «¿Para qué sirve?» para ver la explicación o «Tienda» para abrir el enlace de compra. Puedes marcar
+              lo que ya esté conseguido.</p>
+          </div><button class="btn small" id="copy">⧉ Copiar lista</button>
+        </div>
+        <div class="filterbar" role="group" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></div>
+        <nav class="category-nav" id="category-nav" aria-label="Explorar categorías"></nav>
+        <div id="category-groups"></div>
+        <div class="note">✦ Precios orientativos, no confirmados en carrito. Los enlaces conducen a tiendas externas;
+          comprueba stock, variantes, envío e impuestos antes de pagar. Los artículos marcados como «conseguido» solo se
+          guardan en este navegador, no se sincronizan entre dispositivos.</div>
+      </section>
+      <section class="section" id="proyectos">
+        <div class="heading">
+          <div>
+            <div class="eyebrow">El gran plan</div>
+            <h2>¿Y esto para qué es?</h2>
+            <p>No son piezas al azar: juntas permiten construir estos tres proyectos, de menor a mayor complejidad.</p>
+          </div>
+        </div>
+        <div class="explain">
+          <article class="feature">
+            <div class="feature-icon">📷</div>
+            <h3>01. Cámara inteligente</h3>
+            <p>Capturar imágenes, enviarlas por Wi-Fi y reconocer objetos con ayuda de la Raspberry Pi 5.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">🎙️</div>
+            <h3>02. Asistente de voz</h3>
+            <p>Hacer preguntas en voz alta y escuchar respuestas generadas por IA, con pantalla y altavoz.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">🧠</div>
+            <h3>03. Todo en uno</h3>
+            <p>Unir cámara, micrófono y voz para preguntar al asistente qué está viendo. La Raspberry será su cerebro.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="heading">
+          <div>
+            <div class="eyebrow">Paso a paso</div>
+            <h2>De la caja al invento</h2>
+          </div>
+        </div>
+        <div class="roadmap">
+          <div class="step"><b>1</b>
+            <div>
+              <h3>Montar el primer circuito</h3>
+              <p>Conectar la placa, la pantalla y los cables. Aprender cómo se alimenta todo.</p>
+            </div>
+          </div>
+          <div class="step"><b>2</b>
+            <div>
+              <h3>Conseguir la primera detección</h3>
+              <p>La cámara toma una imagen y la Raspberry identifica los objetos.</p>
+            </div>
+          </div>
+          <div class="step"><b>3</b>
+            <div>
+              <h3>Dar voz al asistente</h3>
+              <p>Capturar audio, interpretarlo y responder mediante el altavoz.</p>
+            </div>
+          </div>
+          <div class="step"><b>4</b>
+            <div>
+              <h3>Combinarlo todo</h3>
+              <p>Conseguir un pequeño asistente multimodal, programado y montado por mí.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><span>✦ Hecho con ilusión, cables y un poquito de IA · Reyes 2027</span><span>La Raspberry Pi
+        5 ya está en casa · El multímetro también ✓</span></footer>
+  </div>
+  <dialog id="details" aria-labelledby="modal-title">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div><span class="eyebrow" id="modal-store"></span>
+          <h2 id="modal-title"></h2>
+        </div><button class="modal-close" id="close" aria-label="Cerrar">×</button>
+      </div><span class="modal-emoji" id="modal-emoji"></span>
+      <p id="modal-description"></p>
+      <h3>¿Por qué lo necesito?</h3>
+      <ul id="modal-uses"></ul>
+      <div class="modal-actions"><a id="modal-link" class="btn primary" target="_blank" rel="noopener noreferrer">Ver en
+          la tienda ↗</a><button class="btn" id="modal-done">Marcar conseguido</button></div>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    'use strict';
+    const items = __CATALOG_JSON__;
+    const categories = [...new Map(items.map(item => [item.categoryId || 'inventos', {
+      id: item.categoryId || 'inventos', name: item.categoryName || 'Inventos', emoji: item.categoryEmoji || '🧪'
+    }])).values()];
+    const euro = amount => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 }).format(amount);
+    const storageKey = 'carta-reyes-2027-conseguidos';
+    let obtained = new Set();
+    try { obtained = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]')); } catch { obtained = new Set(); }
+    let filter = 'all';
+    let selected = null;
+    const categoryNav = document.querySelector('#category-nav');
+    const categoryGroups = document.querySelector('#category-groups');
+    const dialog = document.querySelector('#details');
+    function render() {
+      categoryNav.replaceChildren();
+      categoryGroups.replaceChildren();
+      categories.forEach(category => {
+        const categoryItems = items.filter(item => (item.categoryId || 'inventos') === category.id &&
+          (filter === 'all' || item.store === filter));
+        if (!categoryItems.length) return;
+        const navigation = document.createElement('a');
+        navigation.className = 'category-link'; navigation.href = `#category-${category.id}`;
+        const navEmoji = document.createElement('span'); navEmoji.className = 'category-icon'; navEmoji.textContent = category.emoji;
+        const navText = document.createElement('span'); navText.textContent = category.name;
+        const navCount = document.createElement('span'); navCount.className = 'category-total';
+        navCount.textContent = `${categoryItems.length} ${categoryItems.length === 1 ? 'regalo' : 'regalos'}`;
+        navCount.dataset.categoryCount = '';
+        navigation.append(navEmoji, navText, navCount); categoryNav.append(navigation);
+
+        const section = document.createElement('section'); section.className = 'category-section';
+        section.id = `category-${category.id}`; section.dataset.category = category.id;
+        const heading = document.createElement('div'); heading.className = 'category-heading';
+        const icon = document.createElement('span'); icon.className = 'category-icon'; icon.textContent = category.emoji;
+        const title = document.createElement('div');
+        const name = document.createElement('h3'); name.textContent = category.name;
+        const count = document.createElement('p'); count.dataset.categoryCount = '';
+        count.textContent = `${categoryItems.length} ${categoryItems.length === 1 ? 'regalo' : 'regalos'}`;
+        title.append(name, count); heading.append(icon, title);
+        const cards = document.createElement('div'); cards.className = 'cards';
+        section.append(heading, cards); categoryGroups.append(section);
+        categoryItems.forEach((item) => {
+        const card = document.createElement('article');
+        card.className = 'card' + (obtained.has(item.id) ? ' is-bought' : '');
+        const art = document.createElement('div'); art.className = 'art'; art.style.setProperty('--glow', item.glow);
+        const number = document.createElement('span'); number.className = 'number'; number.textContent = `REGALO Nº ${String(items.indexOf(item) + 1).padStart(2, '0')}`;
+        const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.setAttribute('aria-hidden', 'true'); emoji.textContent = item.emoji;
+        const category = document.createElement('span'); category.className = 'category'; category.textContent = item.store;
+        art.append(number, emoji, category);
+        const body = document.createElement('div'); body.className = 'card-body';
+        const title = document.createElement('h3'); title.textContent = item.name;
+        const description = document.createElement('p'); description.className = 'desc'; description.textContent = `${item.subtitle} · ${item.description.split('.')[0]}.`;
+        const bottom = document.createElement('div'); bottom.className = 'card-bottom';
+        const price = document.createElement('span'); price.className = 'price'; price.textContent = euro(item.price);
+        const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; bottom.append(price, tag);
+        const links = document.createElement('div'); links.className = 'card-links';
+        const details = document.createElement('button'); details.className = 'btn details-btn'; details.type = 'button'; details.textContent = '¿Para qué sirve?';
+        const shop = document.createElement('a'); shop.className = 'btn primary'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(details, shop);
+        const bought = document.createElement('label'); bought.className = 'bought'; const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = obtained.has(item.id); bought.append(checkbox, document.createTextNode(' Ya está conseguido'));
+        body.append(title, description, bottom, links, bought); card.append(art, body);
+        details.addEventListener('click', () => openDetail(item));
+        checkbox.addEventListener('change', (e) => toggle(item.id, e.target.checked));
+        cards.append(card);
+        });
+      });
+      document.querySelector('#count').textContent = `${items.length} regalos`;
+      document.querySelector('#total').textContent = `${euro(items.reduce((sum, i) => sum + i.price, 0))}`;
+    }
+    function toggle(id, checked) { if (checked) obtained.add(id); else obtained.delete(id); try { localStorage.setItem(storageKey, JSON.stringify([...obtained])); } catch { } render(); }
+    function openDetail(item) { selected = item; document.querySelector('#modal-store').textContent = item.store + ' · ' + euro(item.price); document.querySelector('#modal-title').textContent = item.name; document.querySelector('#modal-emoji').textContent = item.emoji; document.querySelector('#modal-description').textContent = item.description; const ul = document.querySelector('#modal-uses'); ul.replaceChildren();[...item.uses, item.note].forEach(text => { const li = document.createElement('li'); li.textContent = text; ul.append(li); }); document.querySelector('#modal-link').href = item.url; document.querySelector('#modal-done').textContent = obtained.has(item.id) ? 'Desmarcar conseguido' : 'Marcar conseguido'; dialog.showModal(); }
+    document.querySelector('#modal-done').addEventListener('click', () => { if (!selected) return; toggle(selected.id, !obtained.has(selected.id)); dialog.close(); });
+    document.querySelector('#close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() });
+    document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); filter = chip.dataset.filter; render(); }));
+    let toastTimeout;
+    function toast(message) { const el = document.querySelector('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('show'), 2600) }
+    document.querySelector('#copy').addEventListener('click', async () => { const text = ['🎄 CARTA DE REYES 2027', '', ...items.map(i => `${i.name} — ${euro(i.price)} — ${i.store}\n${i.url}`), '', 'Precios orientativos sin envío.'].join('\n'); try { await navigator.clipboard.writeText(text); toast('¡Lista copiada! ✨') } catch { toast('No se pudo copiar automáticamente') } });
+    render();
+  </script>
+</body>
+
+</html>
