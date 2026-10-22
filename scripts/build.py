@@ -149,10 +149,13 @@ def discover_profiles(profile_root=ROOT):
 
 
 def render_landing_page(profiles):
-    """Render a simple top-level directory of available letters."""
+    """Render a welcoming top-level directory of available letters."""
     links = "\n".join(
-        f'<li><a href="./{html.escape(year, quote=True)}/{html.escape(persona, quote=True)}/">'
-        f'{html.escape(persona.replace("-", " ").title())} · {html.escape(year)}</a></li>'
+        f'<li><a class="letter-card" href="./{html.escape(year, quote=True)}/{html.escape(persona, quote=True)}/">'
+        f'<span class="letter-icon" aria-hidden="true">🎁</span>'
+        f'<span class="letter-copy"><strong>{html.escape(persona.replace("-", " ").title())}</strong>'
+        f'<small>Carta de Reyes · {html.escape(year)}</small></span>'
+        f'<span class="letter-arrow" aria-hidden="true">↗</span></a></li>'
         for year, persona in profiles
     )
     return f'''<!doctype html>
@@ -160,21 +163,102 @@ def render_landing_page(profiles):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182a38">
+  <meta name="description" content="Elige una carta de Reyes y descubre sus ideas de regalos.">
   <title>Cartas de Reyes</title>
   <style>
-    body {{ max-width: 42rem; margin: 4rem auto; padding: 0 1.25rem; color: #243047; font: 1.1rem/1.6 system-ui, sans-serif; }}
-    h1 {{ color: #7d2635; }}
-    li {{ margin: .75rem 0; }}
+    :root {{
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #24343d;
+      background: #f5f1e8;
+      font-synthesis: none;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 14% 8%, rgb(239 199 124 / 32%), transparent 32rem),
+        radial-gradient(ellipse at 92% 42%, rgb(162 213 191 / 24%), transparent 28rem),
+        #f5f1e8;
+    }}
+    .page {{ width: min(100% - 2rem, 48rem); margin: 0 auto; padding: 4rem 0 5rem; }}
+    .hero {{
+      position: relative;
+      overflow: hidden;
+      padding: clamp(2rem, 7vw, 4rem);
+      border: 1px solid rgb(255 255 255 / 14%);
+      border-radius: 2rem;
+      color: #faf0db;
+      background: linear-gradient(135deg, #182a38, #29424b 72%, #36534e);
+      box-shadow: 0 1.5rem 3.5rem rgb(24 42 56 / 16%);
+    }}
+    .hero::after {{
+      position: absolute;
+      right: -2rem;
+      bottom: -5.5rem;
+      width: 14rem;
+      height: 14rem;
+      border: 1px solid rgb(239 199 124 / 32%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1.5rem rgb(239 199 124 / 7%), 0 0 0 3rem rgb(239 199 124 / 5%);
+      content: "";
+    }}
+    .eyebrow {{
+      margin: 0 0 1rem;
+      color: #efc77c;
+      font-size: .75rem;
+      font-weight: 750;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }}
+    h1 {{ max-width: 12ch; margin: 0; font-family: Georgia, serif; font-size: clamp(2.6rem, 8vw, 4.6rem); font-weight: 500; line-height: .98; letter-spacing: -.045em; }}
+    .intro {{ max-width: 34rem; margin: 1.5rem 0 0; color: #d5dfd9; font-size: 1rem; line-height: 1.7; }}
+    .section-heading {{ display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.5rem .25rem 1rem; }}
+    .section-heading h2 {{ margin: 0; font-family: Georgia, serif; font-size: 1.65rem; font-weight: 500; }}
+    .section-heading span {{ color: #64747b; font-size: .85rem; }}
+    .letters {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: .9rem; margin: 0; padding: 0; list-style: none; }}
+    .letter-card {{
+      display: flex;
+      min-height: 6.5rem;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid #e5ddce;
+      border-radius: 1.25rem;
+      color: inherit;
+      background: rgb(255 253 248 / 86%);
+      box-shadow: 0 .5rem 1.4rem rgb(24 42 56 / 5%);
+      text-decoration: none;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }}
+    .letter-card:hover {{ transform: translateY(-3px); border-color: #c8a365; box-shadow: 0 .9rem 1.8rem rgb(24 42 56 / 10%); }}
+    .letter-card:focus-visible {{ outline: 3px solid #b78338; outline-offset: 4px; }}
+    .letter-icon {{ display: grid; width: 3.25rem; height: 3.25rem; flex: 0 0 auto; place-items: center; border-radius: 1rem; background: #f4e8cb; font-size: 1.5rem; }}
+    .letter-copy {{ display: grid; gap: .2rem; }}
+    .letter-copy strong {{ font-size: 1.05rem; }}
+    .letter-copy small {{ color: #68787d; font-size: .85rem; }}
+    .letter-arrow {{ margin-left: auto; color: #9b722f; font-size: 1.25rem; }}
+    footer {{ margin-top: 2rem; color: #68787d; font-size: .8rem; text-align: center; }}
+    @media (prefers-reduced-motion: reduce) {{ .letter-card {{ transition: none; }} }}
   </style>
 </head>
 <body>
-  <main>
-    <h1>Cartas de Reyes</h1>
-    <p>Elegí una carta para ver sus ideas de regalos.</p>
-    <ul>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">✨ Una tradición, muchas ilusiones</p>
+      <h1>Cartas de Reyes</h1>
+      <p class="intro">Elige una carta para ver sus ideas de regalos.</p>
+    </header>
+    <main>
+      <div class="section-heading"><h2>Elige tu carta</h2><span>{len(profiles)} disponibles</span></div>
+      <ul class="letters">
 {links}
-    </ul>
-  </main>
+      </ul>
+    </main>
+    <footer>Hecho con ilusión ✦</footer>
+  </div>
 </body>
 </html>
 '''
