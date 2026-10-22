@@ -1,6 +1,6 @@
 categories:
-  - id: detalles
-    name: Detalles
+  - id: barbies
+    name: Barbies
     emoji: 🌟
     items:
       - id: cuaderno
