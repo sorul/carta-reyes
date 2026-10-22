@@ -904,7 +904,7 @@
       id: item.categoryId || 'inventos', name: item.categoryName || 'Inventos', emoji: item.categoryEmoji || '🧪'
     }])).values()];
     const euro = amount => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 }).format(amount);
-    const storageKey = 'carta-reyes-2027-conseguidos';
+    const storageKey = 'carta-reyes:2027:cayetano:conseguidos';
     let obtained = new Set();
     try { obtained = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]')); } catch { obtained = new Set(); }
     let filter = 'all';

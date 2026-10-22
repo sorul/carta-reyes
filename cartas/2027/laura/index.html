@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Una pequeña carta de Reyes para Laura.">
+  <title>Una carta para Laura</title>
+  <style>
+    :root { color-scheme: light; font-family: Georgia, serif; color: #493647; background: #fff8fb; }
+    body { max-width: 760px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    header { padding: 2rem 0 1rem; border-bottom: 2px solid #f1d6e2; }
+    h1 { margin: 0; font-size: clamp(2rem, 8vw, 4rem); color: #9e5277; }
+    header p { font: 1rem/1.6 system-ui, sans-serif; max-width: 38rem; }
+    .filters { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1rem 0; }
+    .chip { border: 1px solid #dba9c0; border-radius: 999px; padding: .45rem .8rem; color: #713c58; background: white; cursor: pointer; }
+    .chip.active { background: #9e5277; color: white; }
+    #gifts { display: grid; gap: .8rem; }
+    article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; background: white; border: 1px solid #f1d6e2; border-radius: 1rem; padding: 1rem; }
+    article .emoji { font-size: 2rem; } article h2 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    article p { margin: 0; font: .9rem/1.45 system-ui, sans-serif; }
+    article a { color: #9e5277; font: .9rem system-ui, sans-serif; }
+    footer { margin-top: 1.5rem; color: #765b6b; font: .85rem system-ui, sans-serif; }
+    @media (max-width: 460px) { article { grid-template-columns: auto 1fr; } article a { grid-column: 2; } }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Mi carta de Reyes · 2027</p>
+    <h1>Para Laura ✨</h1>
+    <p>Un par de ideas pequeñas para compartir momentos bonitos y seguir imaginando juntas.</p>
+  </header>
+  <nav class="filters" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></nav>
+  <main id="gifts" aria-live="polite"></main>
+  <footer><span id="count"></span> · Puedes marcar lo que ya llegó; se guarda solo en este navegador.</footer>
+  <script>
+    const items = __CATALOG_JSON__;
+    const storageKey = 'carta-reyes:2027:laura:conseguidos';
+    let obtained = new Set();
+    try { obtained = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]')); } catch { obtained = new Set(); }
+    let filter = 'all';
+    const list = document.querySelector('#gifts');
+    function render() {
+      list.replaceChildren();
+      const visible = items.filter(item => filter === 'all' || item.store === filter);
+      visible.forEach(item => {
+        const card = document.createElement('article');
+        const emoji = document.createElement('span');
+        emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true');
+        const details = document.createElement('div');
+        const title = document.createElement('h2'); title.textContent = item.name;
+        const description = document.createElement('p'); description.textContent = item.subtitle + ' · ' + item.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+        details.append(title, description);
+        const link = document.createElement('a'); link.href = item.url; link.textContent = 'Ver detalle ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        const label = document.createElement('label');
+        const check = document.createElement('input'); check.type = 'checkbox'; check.checked = obtained.has(item.id);
+        check.addEventListener('change', () => {
+          if (check.checked) obtained.add(item.id); else obtained.delete(item.id);
+          try { localStorage.setItem(storageKey, JSON.stringify([...obtained])); } catch { }
+        });
+        label.append(check, document.createTextNode(' Conseguido'));
+        card.append(emoji, details, link, label);
+        list.append(card);
+      });
+      document.querySelector('#count').textContent = visible.length + ' ideas';
+    }
+    document.querySelector('.filters').addEventListener('click', event => {
+      const button = event.target.closest('button[data-filter]');
+      if (!button) return;
+      filter = button.dataset.filter;
+      document.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('active', chip === button));
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

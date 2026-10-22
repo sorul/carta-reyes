@@ -13,6 +13,8 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PROFILE_YEAR = re.compile(r"^\d{4}$")
+PROFILE_PERSON = re.compile(r"^[a-z][a-z0-9-]*$")
 RESERVED_IDS = {"__proto__", "prototype", "constructor"}
 FIELDS = ("id", "name", "subtitle", "store", "price", "emoji", "glow", "tag",
           "url", "description", "uses", "note")
@@ -115,20 +117,127 @@ def render_html(items, template):
     return marker_pattern.sub(lambda match: replacements[match.group(0)], template)
 
 
+def profile_paths(year, persona, profile_root=ROOT):
+    """Resolve a year/person profile without allowing path traversal."""
+    if not isinstance(year, str) or not PROFILE_YEAR.fullmatch(year):
+        raise CatalogError("YEAR debe ser un año de cuatro cifras, por ejemplo 2027.")
+    if not isinstance(persona, str) or not PROFILE_PERSON.fullmatch(persona):
+        raise CatalogError("PERSONA debe ser un identificador en minúsculas, por ejemplo cayetano.")
+    profile = Path(profile_root) / "cartas" / year / persona
+    catalog = profile / "catalogo.yml"
+    template = profile / "index.html"
+    if not catalog.is_file() or not template.is_file():
+        raise CatalogError(f"No existe el perfil cartas/{year}/{persona} (se requieren catalogo.yml e index.html).")
+    return catalog, template
+
+
+def discover_profiles(profile_root=ROOT):
+    """Return sorted (year, persona) pairs for complete profile directories."""
+    profiles = []
+    cartas = Path(profile_root) / "cartas"
+    if not cartas.is_dir():
+        return profiles
+    for year_dir in cartas.iterdir():
+        if not year_dir.is_dir() or not PROFILE_YEAR.fullmatch(year_dir.name):
+            continue
+        for persona_dir in year_dir.iterdir():
+            if (persona_dir.is_dir() and PROFILE_PERSON.fullmatch(persona_dir.name)
+                    and (persona_dir / "catalogo.yml").is_file()
+                    and (persona_dir / "index.html").is_file()):
+                profiles.append((year_dir.name, persona_dir.name))
+    return sorted(profiles)
+
+
+def render_landing_page(profiles):
+    """Render a simple top-level directory of available letters."""
+    links = "\n".join(
+        f'<li><a href="./{html.escape(year, quote=True)}/{html.escape(persona, quote=True)}/">'
+        f'{html.escape(persona.replace("-", " ").title())} · {html.escape(year)}</a></li>'
+        for year, persona in profiles
+    )
+    return f'''<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartas de Reyes</title>
+  <style>
+    body {{ max-width: 42rem; margin: 4rem auto; padding: 0 1.25rem; color: #243047; font: 1.1rem/1.6 system-ui, sans-serif; }}
+    h1 {{ color: #7d2635; }}
+    li {{ margin: .75rem 0; }}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Cartas de Reyes</h1>
+    <p>Elegí una carta para ver sus ideas de regalos.</p>
+    <ul>
+{links}
+    </ul>
+  </main>
+</body>
+</html>
+'''
+
+
+def write_landing_page(profiles, output_root=None):
+    output = Path(output_root) if output_root is not None else ROOT / "dist"
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "index.html").write_text(render_landing_page(profiles), encoding="utf-8")
+
+
+def build_profile(year, persona, output_root=None, profile_root=ROOT, refresh_landing=True):
+    catalog_path, template_path = profile_paths(year, persona, profile_root)
+    items = load_catalog(catalog_path)
+    rendered = render_html(items, template_path.read_text(encoding="utf-8"))
+    output = Path(output_root) if output_root is not None else ROOT / "dist"
+    output = output / year / persona
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "index.html").write_text(rendered, encoding="utf-8")
+    if refresh_landing:
+        generated_profiles = [
+            (available_year, available_persona)
+            for available_year, available_persona in discover_profiles(profile_root)
+            if (Path(output_root) if output_root is not None else ROOT / "dist")
+            .joinpath(available_year, available_persona, "index.html").is_file()
+        ]
+        write_landing_page(generated_profiles, output_root)
+    return output
+
+
+def build_all(profile_root=ROOT, output_root=None):
+    """Build every complete source profile and the root landing page."""
+    profiles = discover_profiles(profile_root)
+    if not profiles:
+        raise CatalogError("No se encontraron perfiles completos en cartas/<año>/<persona>/.")
+    for year, persona in profiles:
+        build_profile(year, persona, output_root, profile_root, refresh_landing=False)
+    write_landing_page(profiles, output_root)
+    return profiles
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--catalog", type=Path, default=ROOT / "catalogo.yaml")
-    parser.add_argument("--template", type=Path, default=ROOT / "index.html")
-    parser.add_argument("--output", type=Path, default=ROOT / "dist")
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--all", action="store_true", help="Construir todos los perfiles completos.")
+    selection.add_argument("--year", help="Año del perfil, por ejemplo 2027.")
+    parser.add_argument("--persona", help="Persona del perfil, por ejemplo cayetano.")
     args = parser.parse_args()
+    if not args.all and not args.persona:
+        parser.error("--persona es obligatorio al usar --year.")
     try:
-        items = load_catalog(args.catalog)
-        rendered = render_html(items, args.template.read_text(encoding="utf-8"))
-        args.output.mkdir(parents=True, exist_ok=True)
-        (args.output / "index.html").write_text(rendered, encoding="utf-8")
+        if args.all:
+            profiles = build_all()
+            for year, persona in profiles:
+                items = load_catalog(profile_paths(year, persona)[0])
+                print(f"Generado {ROOT / 'dist' / year / persona / 'index.html'} ({len(items)} regalos)")
+            print(f"Generada {ROOT / 'dist' / 'index.html'} ({len(profiles)} perfiles)")
+            return
+        output = build_profile(args.year, args.persona)
+        items = load_catalog(profile_paths(args.year, args.persona)[0])
     except (CatalogError, OSError) as exc:
         parser.error(str(exc))
-    print(f"Generado {args.output / 'index.html'} ({len(items)} regalos)")
+    print(f"Generado {output / 'index.html'} ({len(items)} regalos)")
 
 
 if __name__ == "__main__":

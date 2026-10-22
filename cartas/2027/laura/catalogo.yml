@@ -1,0 +1,32 @@
+categories:
+  - id: detalles
+    name: Detalles
+    emoji: 🌟
+    items:
+      - id: cuaderno
+        name: Cuaderno bonito
+        subtitle: Para ideas y dibujos
+        store: Papelería
+        price: 12.50
+        emoji: 📓
+        glow: '#e7a6bf'
+        tag: Creatividad
+        url: https://example.com/cuaderno
+        description: Un cuaderno para guardar ideas, dibujos y planes.
+        uses:
+          - Apuntar ideas
+          - Dibujar
+        note: ¡Cualquier diseño alegre me gusta!
+      - id: paseo
+        name: Paseo sorpresa
+        subtitle: Una tarde juntas
+        store: Experiencias
+        price: 0
+        emoji: 🎟️
+        glow: '#e7a6bf'
+        tag: Plan especial
+        url: https://example.com/paseo
+        description: Elegimos juntas un lugar nuevo para visitar.
+        uses:
+          - Descubrir un sitio nuevo
+        note: El destino puede ser una sorpresa.
