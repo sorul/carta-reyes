@@ -1,32 +1,288 @@
 categories:
+  - id: libros
+    name: Libros
+    emoji: 📚
+    items:
+      - id: generacion-pkmn
+        name: Generación PKMN
+        subtitle: Una vida en la hierba
+        store: Amazon
+        price: 24.65
+        emoji: 🌿
+        glow: '#b8d8b0'
+        tag: Pokémon
+        url: https://www.amazon.es/Libro-Generaci%C3%B3n-PKMN-Vida-Hierba/dp/8412936949
+        description: El libro Generación PKMN · Una vida en la hierba.
+        uses:
+          - Leer y disfrutar de Pokémon
+        note: Este es el título que aparece en mi carta.
+
+      - id: crochet-barbie
+        name: Crochet for Barbie
+        subtitle: De Nicky Epstein
+        store: Etsy
+        price: null
+        emoji: 🧶
+        glow: '#e7a6bf'
+        tag: Crochet
+        url: https://www.etsy.com/es/listing/4585155249/ganchillo-para-muneca-barbie-patrones?ls=s&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=crochet+for+barbie+nicky+epstein&ref=sr_gallery-1-1&sr_prefetch=1&pf_from=market&content_source=7a581624-f397-41e8-a9e8-9987a62ba5d1%253ALT9abbd79097a4460bd591a741e67d62274db677e8&organic_search_click=1&logging_key=7a581624-f397-41e8-a9e8-9987a62ba5d1%3ALT9abbd79097a4460bd591a741e67d62274db677e8
+        description: Un libro de proyectos de crochet para vestir a Barbie.
+        uses:
+          - Crear ropa para mis Barbies
+          - Inspirarme para nuevos proyectos
+        note: Es difícil de encontrar, puedes probar por Vinted, Etsy o Amazon.
+
+      - id: barbie-celebracion-icono
+        name: "Barbie: Celebración de un icono"
+        subtitle: Un libro para mi lado coleccionista
+        store: null
+        price: null
+        emoji: 🎀
+        glow: '#f3a6cd'
+        tag: Barbie
+        url: null
+        description: El libro de Barbie con la portada rosa que aparece en mi carta.
+        uses:
+          - Disfrutar del universo Barbie
+          - Añadirlo a mi colección de libros
+        note: Buscar la edición que aparece en la imagen.
+
+      - id: llanto-muertos
+        name: El llanto de los muertos
+        subtitle: De Camilla Läckberg
+        store: null
+        price: null
+        emoji: 🔎
+        glow: '#b6bfd9'
+        tag: Novela
+        url: null
+        description: La novela de Camilla Läckberg que aparece en mi carta.
+        uses:
+          - Disfrutar de un rato de lectura
+        note: Este es el título concreto que quiero.
+
   - id: barbies
     name: Barbies
-    emoji: 🌟
+    emoji: 🎀
     items:
-      - id: cuaderno
-        name: Cuaderno bonitoo
-        subtitle: Para ideas y dibujos
-        store: Papelería
-        price: 12.50
-        emoji: 📓
-        glow: '#e7a6bf'
-        tag: Creatividad
-        url: https://example.com/cuaderno
-        description: Un cuaderno para guardar ideas, dibujos y planes.
+      - id: barbie-sleeping-beauty
+        name: Barbie Sleeping Beauty
+        subtitle: La Bella Durmiente
+        store: Vinted / Wallapop
+        price: null
+        emoji: 👑
+        glow: '#a9c9ee'
+        tag: Princesas
+        url: null
+        description: La Barbie con vestido azul y dorado de la carta.
         uses:
-          - Apuntar ideas
-          - Dibujar
-        note: ¡Cualquier diseño alegre me gusta!
-      - id: paseo
-        name: Paseo sorpresa
-        subtitle: Una tarde juntas
-        store: Experiencias
-        price: 0
-        emoji: 🎟️
+          - Ampliar mi colección
+          - Exponerla
+        note: Buscar el modelo exacto de la foto, preferiblemente nuevo en caja.
+
+      - id: barbie-rapunzel
+        name: Barbie Rapunzel
+        subtitle: La de la caja rosa de la carta
+        store: Vinted / Wallapop
+        price: null
+        emoji: 🏰
         glow: '#e7a6bf'
-        tag: Plan especial
-        url: https://example.com/paseo
-        description: Elegimos juntas un lugar nuevo para visitar.
+        tag: Princesas
+        url: null
+        description: La Barbie Rapunzel con vestido rosa que aparece en mi selección.
         uses:
-          - Descubrir un sitio nuevo
-        note: El destino puede ser una sorpresa.
+          - Ampliar mi colección
+          - Exponerla
+        note: Buscar el modelo exacto de la foto, preferiblemente nuevo en caja.
+
+      - id: barbie-jewel-hair-mermaid
+        name: Barbie Jewel Hair Mermaid
+        subtitle: La sirena de pelo largo
+        store: Vinted / Wallapop
+        price: null
+        emoji: 🧜‍♀️
+        glow: '#c4afe3'
+        tag: Sirenas
+        url: null
+        description: La Barbie Jewel Hair Mermaid que aparece en la carta.
+        uses:
+          - Ampliar mi colección
+          - Exponerla
+        note: Buscar la misma versión de la foto, preferiblemente nueva en caja.
+
+      - id: barbie-ballet
+        name: Barbie de ballet
+        subtitle: La de la caja The Ballet de la carta
+        store: Vinted / Wallapop
+        price: null
+        emoji: 🩰
+        glow: '#e8b9cf'
+        tag: Ballet
+        url: null
+        description: La muñeca con cuerpo rosa y falda negra estampada de la imagen.
+        uses:
+          - Ampliar mi colección
+          - Exponerla
+        note: Confirmar el nombre del modelo y buscar la misma muñeca de la foto.
+
+      - id: barbie-caja-amarilla
+        name: Barbie morena de la caja amarilla
+        subtitle: La del conjunto azul de la carta
+        store: Vinted / Wallapop
+        price: null
+        emoji: 💙
+        glow: '#a5d9df'
+        tag: Colección
+        url: null
+        description: La muñeca morena con conjunto azul y caja amarilla que aparece en la carta.
+        uses:
+          - Ampliar mi colección
+          - Exponerla
+        note: Confirmar el nombre del modelo y buscar la misma muñeca de la foto.
+
+      - id: barbie-holiday-sweater
+        name: Barbie Holiday Sweater
+        subtitle: Con su jersey navideño
+        store: null
+        price: null
+        emoji: 🎄
+        glow: '#b8d8b0'
+        tag: Navidad
+        url: null
+        description: La Barbie con jersey navideño y pantalones de cuadros de la carta.
+        uses:
+          - Ampliar mi colección
+          - Decorar mi rincón Barbie en Navidad
+        note: La imagen muestra la muñeca en caja y fuera de ella; es un solo regalo.
+
+      - id: barbie-rockers
+        name: Barbie Rockers
+        subtitle: La de la caja negra y rosa
+        store: Vinted / Wallapop
+        price: null
+        emoji: 🎸
+        glow: '#ed8fc4'
+        tag: Rockers
+        url: null
+        description: La Barbie Rockers con el conjunto rosa que aparece en mi carta.
+        uses:
+          - Ampliar mi colección
+          - Exponerla
+        note: Buscar la misma versión de la foto, preferiblemente nueva en caja.
+
+  - id: coleccionables
+    name: Coleccionables
+    emoji: 🧸
+    items:
+      - id: minibrands-nevera
+        name: Mini Brands · Nevera
+        subtitle: El pack con la nevera de la carta
+        store: null
+        price: null
+        emoji: 🧊
+        glow: '#a9dcd6'
+        tag: Miniaturas
+        url: null
+        description: El pack de Mini Brands con la nevera que aparece en la imagen.
+        uses:
+          - Coleccionar miniaturas
+          - Preparar escenas para mis muñecas
+        note: Buscar el mismo pack de la foto.
+
+      - id: minibrands-bola
+        name: Bola Mini Brands
+        subtitle: Una sorpresa en miniatura
+        store: null
+        price: null
+        emoji: 🛍️
+        glow: '#d4b1ec'
+        tag: Miniaturas
+        url: null
+        description: La bola sorpresa de ZURU Mini Brands que aparece en mi carta.
+        uses:
+          - Descubrir nuevas miniaturas
+          - Ampliar mi colección
+        note: Confirmar la serie exacta de la bola de la imagen.
+
+      - id: mickey-popmart
+        name: Mickey · Boundless Creativity
+        subtitle: De POP MART
+        store: POP MART
+        price: null
+        emoji: 🐭
+        glow: '#efc494'
+        tag: Disney
+        url: null
+        description: La caja de Mickey Boundless Creativity que aparece en mi carta.
+        uses:
+          - Ampliar mi colección
+          - Decorar mi estantería
+        note: Buscar esta colección concreta.
+
+  - id: otros-caprichos
+    name: Otros caprichos
+    emoji: ✨
+    items:
+      - id: kit-amigurumi-burro
+        name: Kit de amigurumi · Burro
+        subtitle: De Rico Design
+        store: null
+        price: null
+        emoji: 🧶
+        glow: '#d3c8bc'
+        tag: Manualidades
+        url: null
+        description: El kit para hacer el burrito de crochet que aparece en mi carta.
+        uses:
+          - Disfrutar de un proyecto de ganchillo
+          - Crear mi propio burrito
+        note: Buscar el kit del burro de Rico Design que aparece en la foto.
+
+      - id: cascos-musica
+        name: Cascos de música
+        subtitle: Para escuchar mis temazos
+        store: null
+        price: null
+        emoji: 🎧
+        glow: '#b8bfd5'
+        tag: Música
+        url: null
+        description: Unos auriculares de diadema como los de la imagen.
+        uses:
+          - Escuchar música
+          - Atender llamadas
+        note: Unos casquitos, que mi gordo se queja cuando le llamo de los míos.
+
+      - id: cafetera-bialetti
+        name: Cafetera Bialetti
+        subtitle: La rosa de la carta
+        store: null
+        price: null
+        emoji: ☕
+        glow: '#f29ac6'
+        tag: Para casa
+        url: null
+        description: La cafetera Bialetti rosa con dibujos que aparece en mi carta.
+        uses:
+          - Preparar café
+          - Dar un toque rosa a la cocina
+        note: Buscar el mismo diseño de la imagen.
+
+  - id: regalo-estrella
+    name: Regalo estrella
+    emoji: ⭐
+    items:
+      - id: oscar
+        name: Óscar
+        subtitle: Mi esperado perro salchicha
+        store: null
+        price: null
+        emoji: 🐶
+        glow: '#efbd79'
+        tag: El más deseado
+        url: null
+        description: Óscar sigue en mi carta hasta que los Reyes Magos me lo traigan.
+        uses:
+          - Compartir nuestra vida
+          - Dar y recibir mucho cariño
+        note: Mi regalo estrella, este año y los que hagan falta. ❤️
