@@ -245,3 +245,31 @@ categories:
         - Atacar el castillo o defenderlo según el papel.
         - Jugar un duelo de cartas para dos personas de unos 20 minutos.
         note: Edición en español. Para 2 jugadores; partidas de unos 20 minutos. Precio orientativo sin envío.
+    
+  - id: tecnologia
+    name: Tecnología
+    emoji: 🔊
+    items:
+      - id: samsung-s60d
+        name: Samsung HW-S60D/ZF
+        subtitle: Barra de sonido 5.0 · Dolby Atmos
+        store: PcComponentes
+        price: 252.40
+        emoji: 🎬
+        glow: '#648a9b'
+        tag: Cine en casa
+        url: https://www.pccomponentes.com/samsung-hw-s60d-zf-2024-barra-de-sonido-inalambrica-5-0-canales-dolby-atmos-y-subwoofer-integrado
+        description: Barra de sonido compacta para mejorar el audio
+          de mi televisor, escuchar mejor los diálogos y disfrutar
+          de las películas sin tener que subir tanto el volumen.
+        uses:
+          - Escuchar diálogos con mayor claridad.
+          - Disfrutar de sonido 5.0 con Dolby Atmos.
+          - Utilizar el modo noche para controlar el sonido.
+          - Conectarla al televisor mediante HDMI eARC.
+          - Escuchar música mediante Bluetooth o Wi-Fi.
+        note: No incluye subwoofer externo. Tiene graves
+          integrados. El modo noche ayuda a reducir las
+          molestias, pero no garantiza que los vecinos
+          no escuchen el sonido. Precio sujeto a cambios.
+          
