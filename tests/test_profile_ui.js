@@ -94,6 +94,90 @@ test('both profiles apply each catalog item glow to its rendered visual', () => 
   }
 });
 
+test('both profiles render gift cards with stable ordinal, store, body, and split actions', async () => {
+  for (const profile of profiles) {
+    const ui = runProfile(profile);
+    const cardsIn = groups => findAll(groups, node => node.tagName === 'ARTICLE');
+    const assertCard = (card, index) => {
+      const art = find(card, node => node.className === 'art');
+      assert.ok(art, `${profile}: card ${index + 1} has an art panel`);
+      assert.equal(art.style.properties.get('--glow'), fixtures[index].glow);
+      assert.equal(find(art, node => node.className === 'number')?.textContent, `REGALO Nº ${String(index + 1).padStart(2, '0')}`);
+      assert.equal(find(art, node => node.className === 'category')?.textContent, fixtures[index].store);
+      assert.equal(find(art, node => node.className === 'emoji')?.textContent, fixtures[index].emoji);
+      const body = find(card, node => node.className === 'card-body');
+      assert.ok(body, `${profile}: card ${index + 1} has a body`);
+      assert.equal(find(body, node => node.tagName === 'H4' || node.tagName === 'H3')?.textContent, fixtures[index].name);
+      assert.equal(find(body, node => node.className === 'desc')?.textContent, `${fixtures[index].subtitle} · ${fixtures[index].description.split('.')[0]}.`);
+      assert.match(find(body, node => node.className === 'price')?.textContent || '', /\d+,\d{2}.*€/u);
+      assert.equal(find(body, node => node.className === 'tag')?.textContent, fixtures[index].tag);
+      const links = find(body, node => node.className === 'card-links');
+      assert.ok(links, `${profile}: card ${index + 1} has split actions`);
+      assert.equal(links.children.filter(node => node.tagName === 'BUTTON').length, 1);
+      assert.equal(links.children.filter(node => node.tagName === 'A').length, fixtures[index].url ? 1 : 0);
+      assert.match(links.children.find(node => node.tagName === 'BUTTON').className, /details-btn/);
+      if (fixtures[index].url) {
+        const shop = links.children.find(node => node.tagName === 'A');
+        assert.match(shop.className, /shop-btn|primary/);
+        assert.equal(shop.href, fixtures[index].url);
+        assert.equal(shop.target, '_blank');
+        assert.equal(shop.rel, 'noopener noreferrer');
+      }
+      assert.ok(find(body, node => node.className === 'bought'), `${profile}: card ${index + 1} has an obtained control`);
+    };
+
+    cardsIn(ui.elements.get('#category-groups')).forEach(assertCard);
+    await ui.elements.get('.filters').children[2].fire('click');
+    const filteredCards = cardsIn(ui.elements.get('#category-groups'));
+    assert.equal(filteredCards.length, 1);
+    assertCard(filteredCards[0], 1);
+  }
+});
+
+test('Laura card grid keeps the reference 3/2/1 responsive breakpoints', () => {
+  const html = fs.readFileSync(path.join(root, 'cartas/2027/laura/index.html'), 'utf8');
+  assert.match(html, /\.cards\s*\{[^}]*grid-template-columns:\s*repeat\(3,/s);
+  assert.match(html, /@media\s*\(max-width:\s*850px\)[\s\S]*?\.cards\s*\{[^}]*grid-template-columns:\s*repeat\(2,/);
+  assert.match(html, /@media\s*\(max-width:\s*580px\)[\s\S]*?\.cards\s*\{[^}]*grid-template-columns:\s*1fr/);
+  assert.match(html, /@media\s*\(max-width:\s*580px\)(?:(?!@media)[\s\S])*?\.art\s*\{\s*height:\s*180px;\s*\}/);
+});
+
+test('Laura topbar and hero match the reference with three accessible kings', () => {
+  const html = fs.readFileSync(path.join(root, 'cartas/2027/laura/index.html'), 'utf8');
+  assert.match(html, /<header class="topbar">[\s\S]*?Carta de Reyes[\s\S]*?Edición\s*2027[\s\S]*?Ver regalos ↓/);
+  assert.match(html, /✦ Queridos Reyes Magos \(y Laura\) ✦/);
+  assert.match(html, /<h1 id="hero-title">Este año quiero <em>crear magia\.<\/em><\/h1>/);
+  const description = html.match(/<section class="hero"[^>]*>[\s\S]*?<p>([\s\S]*?)<\/p>/)?.[1] || '';
+  const normalizedDescription = description.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  assert.equal(normalizedDescription, 'O, para ser más exactos, construir una cámara que reconozca objetos y un pequeño asistente con inteligencia artificial. Esta es mi lista de piezas para convertir la idea en realidad. 🎄 También he pedido libros y juegos: no todo en la vida es crear; también hay espacio para jugar. 🎲');
+  assert.doesNotMatch(html, /#proyectos|¿Qué voy a construir\?|🤖|Robot simpático|🎅🏻|🧔🏽‍♂️/);
+  assert.equal((html.match(/<span class="king-group" role="img" aria-label="Tres Reyes Magos">/g) || []).length, 1);
+  const kings = html.match(/<span class="king (?:melchior|gaspar|balthazar)" aria-hidden="true">/g) || [];
+  assert.equal(kings.length, 3, 'exactly three decorative portrait wrappers');
+  const portrait = name => html.match(new RegExp(`<span class="king ${name}" aria-hidden="true">([\\s\\S]*?)<\\/span><\\/span>`))?.[1] || '';
+  assert.match(portrait('melchior'), /class="king-face" aria-hidden="true">🧔🏼‍♂️<\/span>[\s\S]*class="king-crown" aria-hidden="true">👑$/);
+  assert.match(portrait('gaspar'), /class="king-face" aria-hidden="true">🧔‍♂️<\/span>[\s\S]*class="king-crown" aria-hidden="true">👑$/);
+  assert.match(portrait('balthazar'), /class="king-face" aria-hidden="true">👳🏿‍♂️$/);
+  assert.doesNotMatch(portrait('balthazar'), /king-crown/);
+  assert.equal((html.match(/class="king-crown"/g) || []).length, 2, 'Melchior and Gaspar retain their crowns');
+  const marks = html.match(/<span class="(?:king-face|king-crown)" aria-hidden="true">[^<]+<\/span>/g) || [];
+  assert.equal(marks.length, 5, 'all five visual emoji marks are hidden from assistive technology');
+  assert.doesNotMatch(html, /melchior-face|clip-path:\s*inset\(24%/);
+  assert.match(html, /\.king\s*\{[^}]*display:\s*grid[^}]*grid-template-rows:\s*\.42em \.88em[^}]*height:\s*1\.3em/s);
+  assert.doesNotMatch(html, /\.king-crown\s*\{[^}]*position:\s*absolute/);
+  assert.match(html, /\.king-face\s*\{[^}]*grid-row:\s*2/);
+  assert.match(html, /\.king-crown\s*\{[^}]*grid-row:\s*1[^}]*font-size:\s*\.6em[^}]*align-self:\s*end[^}]*z-index:\s*1/);
+  assert.match(html, /\.king-crown\s*\{[^}]*transform:\s*translateY\(\.12em\)/);
+  assert.ok(.12 < .18, 'crown overlap remains below the upper-face limit');
+  assert.match(html, /\.king-group\s*\{[^}]*transform:\s*translateY\(16px\)/);
+  assert.match(html, /\.king-face\s*\{[^}]*display:\s*block[^}]*width:\s*100%[^}]*font-size:\s*\.88em[^}]*text-align:\s*center/s);
+  assert.ok(.6 / .88 >= .6 && .6 / .88 <= .7, 'crown is 60–70% of portrait face size');
+  assert.equal((html.match(/href="#regalos"/g) || []).length, 2);
+  assert.equal((html.match(/<main\b[^>]*id="regalos"/g) || []).length, 1);
+  assert.match(html, /@media\s*\(max-width:\s*850px\)[\s\S]*?\.hero\s*\{[^}]*grid-template-columns:\s*1fr/);
+  assert.match(html, /@media\s*\(max-width:\s*580px\)[\s\S]*?\.king-group\s*\{[^}]*font-size:\s*clamp\(50px, 16vw, 88px\)/);
+});
+
 test('Laura template supports details, obtained state, null URLs, and clipboard feedback', async () => {
   for (const profile of profiles) {
     const ui = runProfile(profile);

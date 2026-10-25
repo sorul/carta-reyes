@@ -199,7 +199,8 @@ class CatalogBuildTests(unittest.TestCase):
         cayetano_items = build.load_catalog(CATALOG)
         template = (laura / "index.html").read_text(encoding="utf-8")
         self.assertLess(len(items), len(cayetano_items))
-        self.assertIn("Para Laura", template)
+        self.assertIn('aria-label="Tres Reyes Magos"', template)
+        self.assertIn('#4D2E4D', template)
         self.assertNotIn("Para Cayetano", template)
 
 

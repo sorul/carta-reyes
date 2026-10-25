@@ -1,92 +1,799 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Una pequeña carta de Reyes para Laura.">
   <title>Una carta para Laura</title>
   <style>
-    :root { color-scheme: light; font-family: Georgia, serif; color: #493647; background: #fff8fb; }
-    * { box-sizing: border-box; }
-    body { max-width: 900px; margin: 0 auto; padding: 2rem 1rem 4rem; }
-    header { padding: 2rem 0 1rem; border-bottom: 2px solid #f1d6e2; }
-    h1 { margin: 0; font-size: clamp(2rem, 8vw, 4rem); color: #9e5277; }
-    header p { font: 1rem/1.6 system-ui, sans-serif; max-width: 38rem; }
-    .summary { display: flex; gap: 2rem; padding: 1.2rem 0; font: .95rem system-ui, sans-serif; }
-    .stat { display: grid; gap: .2rem; }
-    .stat strong { color: #9e5277; font: bold 1.4rem Georgia, serif; }
-    .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    .section-heading h2 { color: #713c58; }
-    button, .button { border: 1px solid #dba9c0; border-radius: 999px; padding: .55rem .9rem; color: #713c58; background: white; cursor: pointer; font: .9rem system-ui, sans-serif; text-decoration: none; }
-    button:hover, .button:hover { border-color: #9e5277; }
-    .filters { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1rem 0; }
-    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-    .chip.active { background: #9e5277; color: white; }
-    .category-nav { display: flex; gap: .6rem; overflow-x: auto; padding: .2rem .1rem .8rem; }
-    .category-link { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .6rem; border: 1px solid #e8c4d4; border-radius: .9rem; padding: .65rem .9rem; color: #713c58; background: #fff; text-decoration: none; font: .9rem system-ui, sans-serif; }
-    .category-link[hidden] { display: none; }
-    .category-link .category-icon { font-size: 1.3rem; }
-    .category-total, .category-heading p { color: #876b7d; font-size: .8rem; }
-    .category-section { margin: 0 0 1.25rem; padding: 1rem; border: 1px solid #f1d6e2; border-radius: 1rem; background: #fffafd; }
-    .category-heading { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; }
-    .category-heading .category-icon { font-size: 1.7rem; }
-    .category-heading h3 { margin: 0; color: #713c58; font-size: 1.25rem; }
-    .category-heading p { margin: .2rem 0 0; }
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
-    .card { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; padding: 1rem; border: 1px solid #f1d6e2; border-radius: 1rem; background: white; transition: border-color .2s, background .2s; }
-    .card.is-bought { border-color: #9e5277; background: #fff0f6; }
-    .card .emoji-glow { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: radial-gradient(circle at 50% 47%, var(--glow), transparent 65%); }
-    .card .emoji { font-size: 2rem; }
-    .card h4 { margin: 0 0 .25rem; color: #493647; font-size: 1.1rem; }
-    .card p { margin: 0; font: .9rem/1.45 system-ui, sans-serif; }
-    .card-bottom { display: flex; justify-content: space-between; gap: .6rem; margin-top: .5rem; font: .85rem system-ui, sans-serif; }
-    .price { color: #713c58; font-weight: 700; }
-    .tag { color: #876b7d; }
-    .card-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
-    .bought { display: flex; align-items: center; gap: .4rem; margin-top: .7rem; color: #713c58; font: .85rem system-ui, sans-serif; }
-    .note, footer { margin-top: 1.5rem; color: #765b6b; font: .85rem/1.5 system-ui, sans-serif; }
-    dialog { width: min(34rem, calc(100% - 2rem)); border: 1px solid #e8c4d4; border-radius: 1.2rem; padding: 1.4rem; color: #493647; background: #fffafd; }
-    dialog::backdrop { background: #38213088; }
-    .modal-head { display: flex; justify-content: space-between; gap: 1rem; }
-    .modal-head h2 { margin: .2rem 0 .8rem; color: #713c58; }
-    .modal-close { align-self: start; border: 0; font-size: 1.3rem; }
-    .modal-emoji { font-size: 2.6rem; }
-    #modal-description { font: 1rem/1.55 system-ui, sans-serif; }
-    #modal-uses { padding-left: 1.3rem; font: .95rem/1.6 system-ui, sans-serif; }
-    .modal-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
-    #modal-link[hidden] { display: none; }
-    .toast { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); padding: .75rem 1rem; border-radius: 999px; color: white; background: #713c58; font: .9rem system-ui, sans-serif; opacity: 0; pointer-events: none; transition: opacity .2s; }
-    .toast.show { opacity: 1; }
-    @media (max-width: 580px) { body { padding: 1.3rem .8rem 3rem; } .cards { grid-template-columns: 1fr; } .summary { gap: 1rem; } .section-heading { align-items: start; } }
+    :root {
+      color-scheme: dark;
+      font-family: Georgia, serif;
+      color: #fff0f7;
+      background: #4D2E4D;
+      --space: #4D2E4D;
+      --drawer: #8A518A;
+      --panel: #744674;
+      --card: #654064;
+      --line: #bd82b5;
+      --pink: #fff0f7;
+      --pink-bright: #ff9bd3;
+      --pink-soft: #f1cde2;
+      --text: #fff0f7;
+      --muted: #fff0f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      position: relative;
+      isolation: isolate;
+      max-width: 1180px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      color: var(--text);
+      background: var(--space);
+      font: 1rem/1.6 Georgia, serif;
+    }
+
+    .stars {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      background-image: radial-gradient(#ffe8f6 1px, transparent 1px), radial-gradient(#efacd8 1px, transparent 1px);
+      background-size: 97px 103px, 149px 167px;
+      background-position: 13px 19px, 61px 53px;
+      mask-image: linear-gradient(#000, transparent 92%);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #fff0f7;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .logo .logo-icon {
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      width: 37px;
+      height: 37px;
+      border: 1px solid #ffc0e1;
+      border-radius: 12px;
+      color: #ffc0e1;
+    }
+
+    .year {
+      color: #ffe5f4;
+      font: 700 11px/1.4 system-ui, sans-serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .pill,
+    .hero-actions .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid #ffc0e1;
+      border-radius: 100px;
+      padding: 10px 16px;
+      color: #fff0f7;
+      background: transparent;
+      text-decoration: none;
+      transition: border-color .2s, transform .2s, background-color .2s;
+    }
+
+    .pill:hover,
+    .hero-actions .button:hover {
+      border-color: #fff0f7;
+      box-shadow: none;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 35px;
+      align-items: center;
+      padding: 45px 0 48px;
+    }
+
+    .eyebrow {
+      color: #ffc0e1;
+      font: 700 .78rem/1.4 system-ui, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 21px 0 22px;
+      color: #fff2fa;
+      font: 700 clamp(45px, 7vw, 86px)/1.03 Georgia, serif;
+      letter-spacing: -.045em;
+    }
+
+    .hero h1 em {
+      color: #ff9bd3;
+      font-style: normal;
+    }
+
+    .hero p {
+      max-width: 550px;
+      margin: 0;
+      color: #ffe4f3;
+      font: 17px/1.7 system-ui, sans-serif;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-actions .button.primary {
+      border-color: #ffc0e1;
+      color: #4D2E4D;
+      background: #ffc0e1;
+      font-weight: 700;
+    }
+
+    .orb {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      max-width: 390px;
+      aspect-ratio: 1;
+      margin: auto;
+      border: 1px solid #d391c2;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 38%, #9b6794 0%, #69456f 42%, #4d2e4d 76%);
+      box-shadow: 0 0 0 18px #ffc0e115, 0 0 0 46px #ffc0e10a, inset 0 0 70px #321b3d55;
+    }
+
+    .orb::before,
+    .orb::after {
+      position: absolute;
+      color: #ffe4f2;
+      content: '✦';
+      font-size: 28px;
+    }
+
+    .orb::before {
+      top: 8%;
+      left: 4%;
+    }
+
+    .orb::after {
+      right: 2%;
+      bottom: 12%;
+      font-size: 19px;
+    }
+
+    .king-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      font-size: clamp(50px, 10vw, 120px);
+      line-height: 1;
+      transform: translateY(16px);
+      white-space: nowrap;
+    }
+
+    .king {
+      display: grid;
+      flex: 0 0 .95em;
+      grid-template-rows: .42em .88em;
+      justify-items: center;
+      align-items: center;
+      width: .95em;
+      height: 1.3em;
+      font-size: inherit;
+      line-height: 1;
+    }
+
+    .king-face {
+      display: block;
+      grid-row: 2;
+      width: 100%;
+      font-size: .88em;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .king-crown {
+      grid-row: 1;
+      font-size: .6em;
+      line-height: 1;
+      align-self: end;
+      z-index: 1;
+      transform: translateY(.12em);
+    }
+
+    .orbit-label {
+      position: absolute;
+      top: 13%;
+      right: -3%;
+      border: 1px solid #ffc0e1;
+      border-radius: 7px;
+      padding: 10px 14px;
+      color: #4D2E4D;
+      background: #fff0f7;
+      font: 700 12px/1.4 system-ui, sans-serif;
+      transform: rotate(8deg);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.2rem 0 2rem;
+      padding: 1rem;
+      border: 1px solid #aa70a2;
+      border-radius: 1.2rem;
+      background: var(--drawer);
+      box-shadow: 0 12px 35px #24132955;
+      font: .95rem/1.5 system-ui, sans-serif;
+    }
+
+    .stat {
+      display: grid;
+      gap: .2rem;
+    }
+
+    .stat strong {
+      color: var(--pink);
+      font: bold 1.65rem Georgia, serif;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 0 .5rem;
+    }
+
+    h2,
+    h3 {
+      color: #ffe5f4;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    button,
+    .button {
+      border: 1px solid #ffc0e1;
+      border-radius: 999px;
+      padding: .6rem 1rem;
+      color: #4D2E4D;
+      background: #ffe4f2;
+      box-shadow: 0 6px 18px #27152c55;
+      cursor: pointer;
+      font: 700 .9rem system-ui, sans-serif;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    button:hover,
+    .button:hover {
+      border-color: #fff0f7;
+      box-shadow: 0 8px 24px #ff9bd344;
+      transform: translateY(-1px);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #fff0f7;
+      outline-offset: 3px;
+    }
+
+    .filters {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+    }
+
+    .filters button {
+      border-color: #b47eae;
+      color: #fff0f7;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .chip.active {
+      border-color: #ffe7f4;
+      color: #4D2E4D;
+      background: #ffc0e1;
+    }
+
+    .category-nav {
+      display: flex;
+      gap: .7rem;
+      overflow-x: auto;
+      padding: .2rem .1rem 1rem;
+    }
+
+    .category-link {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: .6rem;
+      border: 1px solid #bd82b5;
+      border-radius: 1rem;
+      padding: .7rem 1rem;
+      color: #fff0f7;
+      background: var(--drawer);
+      text-decoration: none;
+      font: .9rem system-ui, sans-serif;
+      box-shadow: 0 7px 20px #28172f55;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .category-link:hover {
+      border-color: #ffc0e1;
+      transform: translateY(-2px);
+    }
+
+    .category-link[hidden] {
+      display: none;
+    }
+
+    .category-link .category-icon {
+      font-size: 1.3rem;
+    }
+
+    .category-total,
+    .category-heading p {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .category-section {
+      margin: 0 0 1.25rem;
+      padding: 1.2rem;
+      border: 1px solid #bd82b5;
+      border-radius: 1.35rem;
+      background: #8A518A80;
+      box-shadow: 0 14px 36px #25152c66, inset 0 1px #ffffff18;
+    }
+
+    .category-heading {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin: 0 0 .9rem;
+    }
+
+    .category-heading .category-icon {
+      font-size: 1.7rem;
+      filter: drop-shadow(0 0 10px #ffc0e155);
+    }
+
+    .category-heading h3 {
+      margin: 0;
+      color: #fff0f7;
+      font-size: 1.3rem;
+    }
+
+    .category-heading p {
+      margin: .2rem 0 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #a974a5;
+      border-radius: 16px;
+      background: var(--card);
+      transition: border-color .2s, transform .2s;
+    }
+
+    .card:hover {
+      border-color: #e4a4cf;
+      transform: translateY(-3px);
+    }
+
+    .card.is-bought {
+      border-color: #ffb7dd;
+      background: var(--panel);
+    }
+
+    .art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 185px;
+      background-color: #6f496f;
+      background-image: radial-gradient(circle at 50% 47%, var(--glow), transparent 65%);
+    }
+
+    .art .emoji {
+      font-size: 83px;
+      filter: drop-shadow(0 12px 8px #0006);
+      transition: transform .2s;
+    }
+
+    .card:hover .art .emoji {
+      transform: scale(1.08) rotate(-5deg);
+    }
+
+    .art .number {
+      position: absolute;
+      top: 17px;
+      left: 18px;
+      color: #ffffff;
+      font: 700 11px/1.4 system-ui, sans-serif;
+      letter-spacing: .1em;
+      text-shadow: 0 1px 3px #38213a;
+    }
+
+    .art .category {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      color: #ffffff;
+      font: 700 10px/1.4 system-ui, sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px #38213a;
+    }
+
+    .card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 20px 20px 17px;
+    }
+
+    .card h4 {
+      margin: 0 0 9px;
+      color: #fff0f7;
+      font: 700 19px/1.3 system-ui, sans-serif;
+    }
+
+    .card .desc {
+      flex: 1;
+      margin: 0 0 18px;
+      color: #fff0f7;
+      font: 13px/1.55 system-ui, sans-serif;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 17px;
+    }
+
+    .price {
+      color: #ffe5f4;
+      font: 700 22px/1.2 system-ui, sans-serif;
+    }
+
+    .tag {
+      border: 1px solid #e1a7ca;
+      border-radius: 20px;
+      padding: 3px 8px;
+      color: #fff0f7;
+      font: 10px/1.4 system-ui, sans-serif;
+      text-align: center;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .card-links .button {
+      flex: 1;
+      padding: 10px 7px;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .card-links .details-btn {
+      border-color: #e1a7ca;
+      color: #fff0f7;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .card-links .details-btn:hover {
+      background: #8a518a;
+      box-shadow: none;
+    }
+
+    .card-links .shop-btn {
+      background: #ffe4f2;
+    }
+
+    .bought {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 14px;
+      color: #fff0f7;
+      font: 12px/1.4 system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    .bought input {
+      width: 16px;
+      height: 16px;
+      accent-color: #ff9bd3;
+    }
+
+    .note,
+    footer {
+      margin-top: 1.5rem;
+      color: #e4bfd8;
+      font: .85rem/1.6 system-ui, sans-serif;
+    }
+
+    dialog {
+      width: min(34rem, calc(100% - 2rem));
+      border: 1px solid #e8a9d0;
+      border-radius: 1.35rem;
+      padding: 1.5rem;
+      color: #fff0f7;
+      background: var(--drawer);
+      box-shadow: 0 24px 70px #160d1dcc;
+    }
+
+    dialog::backdrop {
+      background: #211327bb;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-head h2 {
+      margin: .2rem 0 .8rem;
+      color: #fff0f7;
+    }
+
+    .modal-close {
+      align-self: start;
+      min-width: 2.5rem;
+      padding: .35rem .65rem;
+      color: #4D2E4D;
+      font-size: 1.3rem;
+    }
+
+    .modal-emoji {
+      font-size: 2.6rem;
+      filter: drop-shadow(0 0 12px #ffc0e177);
+    }
+
+    #modal-description {
+      color: #fff0f7;
+      font: 1rem/1.6 system-ui, sans-serif;
+    }
+
+    #modal-uses {
+      padding-left: 1.3rem;
+      color: #f8dced;
+      font: .95rem/1.65 system-ui, sans-serif;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1rem;
+    }
+
+    #modal-link[hidden] {
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 2;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: .75rem 1rem;
+      border: 1px solid #ffc0e1;
+      border-radius: 999px;
+      color: #4D2E4D;
+      background: #ffe4f2;
+      box-shadow: 0 8px 28px #160d1d99;
+      font: .9rem system-ui, sans-serif;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 35px 0 42px;
+        text-align: center;
+      }
+
+      .hero p {
+        margin: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .orb {
+        width: min(70%, 300px);
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 580px) {
+      body {
+        padding: 1.2rem .8rem 3rem;
+      }
+
+      .topbar {
+        padding: 14px 0;
+      }
+
+      .topbar .pill {
+        padding: 9px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 24px 0 34px;
+      }
+
+      .hero h1 {
+        font-size: 49px;
+      }
+
+      .orb {
+        width: 73%;
+        margin: 22px auto 8px;
+      }
+
+      .king-group {
+        font-size: clamp(50px, 16vw, 88px);
+      }
+
+      .orbit-label {
+        right: 0;
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .art {
+        height: 180px;
+      }
+
+      .summary {
+        gap: .7rem;
+        padding: .85rem;
+      }
+
+      .section-heading {
+        align-items: start;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <p>Mi carta de Reyes · 2027</p>
-    <h1>Para Laura ✨</h1>
-    <p>Un par de ideas pequeñas para compartir momentos bonitos y seguir imaginando juntas.</p>
+  <div class="stars" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="logo"><span class="logo-icon" aria-hidden="true">✳</span><span>Carta de Reyes<br><span class="year">Edición 2027</span></span></div>
+    <a class="pill" href="#regalos">Ver regalos ↓</a>
   </header>
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <div class="eyebrow">✦ Queridos Reyes Magos (y Laura) ✦</div>
+      <h1 id="hero-title">Este año quiero <em>crear magia.</em></h1>
+      <p>O, para ser más exactos, construir una cámara que reconozca objetos y un pequeño asistente con inteligencia artificial. Esta es mi lista de piezas para convertir la idea en realidad. 🎄 También he pedido libros y juegos: no todo en la vida es crear; también hay espacio para jugar. 🎲</p>
+      <div class="hero-actions"><a class="button primary" href="#regalos">Explorar mi carta ↗</a></div>
+    </div>
+    <div class="orb"><span class="king-group" role="img" aria-label="Tres Reyes Magos"><span class="king melchior" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔🏼‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king gaspar" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king balthazar" aria-hidden="true"><span class="king-face" aria-hidden="true">👳🏿‍♂️</span></span></span><span class="orbit-label">100% ilusión<br>+ un poco de estaño ✨</span></div>
+  </section>
   <section class="summary" aria-label="Resumen de la carta">
     <div class="stat"><span>Mi carta tiene</span><strong id="count"></strong><span>ideas para compartir</span></div>
     <div class="stat"><span>Total sin envío</span><strong id="total"></strong><span>Precios orientativos</span></div>
   </section>
-  <main>
-    <div class="section-heading"><h2>Ideas para compartir</h2><button id="copy" type="button">⧉ Copiar lista</button></div>
+  <main id="regalos">
+    <div class="section-heading">
+      <h2>Ideas para compartir</h2><button id="copy" type="button">⧉ Copiar lista</button>
+    </div>
     <div class="filters" role="group" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></div>
     <p class="visually-hidden" id="filter-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <nav class="category-nav" id="category-nav" aria-label="Explorar categorías"></nav>
     <div id="category-groups"></div>
-    <p class="note">✦ Precios orientativos. Los artículos marcados como conseguidos solo se guardan en este navegador, no se sincronizan entre dispositivos.</p>
+    <p class="note">✦ Precios orientativos. Los artículos marcados como conseguidos solo se guardan en este navegador,
+      no se sincronizan entre dispositivos.</p>
   </main>
   <footer><span id="footer-count"></span> · Puedes marcar lo que ya llegó; se guarda solo en este navegador.</footer>
   <dialog id="details" aria-labelledby="modal-title">
-    <div class="modal-head"><div><span id="modal-store"></span><h2 id="modal-title"></h2></div><button class="modal-close" id="close" type="button" aria-label="Cerrar">×</button></div>
-    <span class="modal-emoji" id="modal-emoji"></span><p id="modal-description"></p>
-    <h3>¿Por qué lo necesito?</h3><ul id="modal-uses"></ul>
-    <div class="modal-actions"><a id="modal-link" class="button" target="_blank" rel="noopener noreferrer">Ver en la tienda ↗</a><button id="modal-done" type="button">Marcar conseguido</button></div>
+    <div class="modal-head">
+      <div><span id="modal-store"></span>
+        <h2 id="modal-title"></h2>
+      </div><button class="modal-close" id="close" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <span class="modal-emoji" id="modal-emoji"></span>
+    <p id="modal-description"></p>
+    <h3>¿Por qué lo necesito?</h3>
+    <ul id="modal-uses"></ul>
+    <div class="modal-actions"><a id="modal-link" class="button" target="_blank" rel="noopener noreferrer">Ver en la
+        tienda ↗</a><button id="modal-done" type="button">Marcar conseguido</button></div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
@@ -133,21 +840,24 @@
         categoryItems.forEach(item => {
           const card = document.createElement('article');
           card.className = 'card' + (obtained.has(item.id) ? ' is-bought' : '');
-          const emojiGlow = document.createElement('span'); emojiGlow.className = 'emoji-glow'; emojiGlow.style.setProperty('--glow', item.glow);
-          const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true'); emojiGlow.append(emoji);
-          const body = document.createElement('div');
+          const art = document.createElement('div'); art.className = 'art'; art.style.setProperty('--glow', item.glow);
+          const number = document.createElement('span'); number.className = 'number'; number.textContent = `REGALO Nº ${String(items.indexOf(item) + 1).padStart(2, '0')}`;
+          const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true');
+          const store = document.createElement('span'); store.className = 'category'; store.textContent = item.store;
+          art.append(number, emoji, store);
+          const body = document.createElement('div'); body.className = 'card-body';
           const title = document.createElement('h4'); title.textContent = item.name;
-          const description = document.createElement('p'); description.textContent = `${item.subtitle} · ${item.description.split('.')[0]}.`;
+          const description = document.createElement('p'); description.className = 'desc'; description.textContent = `${item.subtitle} · ${item.description.split('.')[0]}.`;
           const bottom = document.createElement('div'); bottom.className = 'card-bottom';
           const price = document.createElement('span'); price.className = 'price'; price.textContent = euro(item.price);
           const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; bottom.append(price, tag);
           const links = document.createElement('div'); links.className = 'card-links';
-          const details = document.createElement('button'); details.type = 'button'; details.textContent = '¿Para qué sirve?'; links.append(details);
-          if (item.url) { const shop = document.createElement('a'); shop.className = 'button'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(shop); }
+          const details = document.createElement('button'); details.className = 'button details-btn'; details.type = 'button'; details.textContent = '¿Para qué sirve?'; links.append(details);
+          if (item.url) { const shop = document.createElement('a'); shop.className = 'button shop-btn'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(shop); }
           const bought = document.createElement('label'); bought.className = 'bought';
           const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = obtained.has(item.id);
           bought.append(checkbox, document.createTextNode(' Ya está conseguido'));
-          body.append(title, description, bottom, links, bought); card.append(emojiGlow, body);
+          body.append(title, description, bottom, links, bought); card.append(art, body);
           details.addEventListener('click', () => openDetail(item));
           checkbox.addEventListener('change', event => toggle(item.id, event.target.checked));
           cards.append(card);
@@ -201,4 +911,5 @@
     render();
   </script>
 </body>
+
 </html>
