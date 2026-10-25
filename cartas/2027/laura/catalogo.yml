@@ -76,7 +76,11 @@ categories:
         uses:
           - Confirmar que mi afición por la novela negra no tiene cura.
         note: Publicado el 21 de octubre de 2026. Disponible en Amazon, Casa del Libro, Fnac y El Corte Inglés.
-
+        
+  - id: barbies
+    name: Barbies
+    emoji: 🩰
+    items:
       - id: barbie-holiday-sweater
         name: Barbie Holiday Sweater
         subtitle: Con su jersey navideño
