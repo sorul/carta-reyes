@@ -1,3 +1,4 @@
+
 categories:
   - id: libros
     name: Libros
@@ -12,7 +13,218 @@ categories:
         glow: '#b8d8b0'
         tag: Pokémon
         url: https://www.amazon.es/Libro-Generaci%C3%B3n-PKMN-Vida-Hierba/dp/8412936949
-        description: El libro Generación PKMN · Una vida en la hierba.
+        description: Libro Generación PKMN. Una vida en la hierba, dedicado al universo Pokémon y a la nostalgia de toda una generación.
         uses:
-          - Leer y disfrutar de Pokémon
-        note: Este es el título que aparece en mi carta.
+          - Volver a mi infancia sin necesidad de inventar una máquina del tiempo.
+          - Recordar cuando mi mayor preocupación era conseguir todos los Pokémon.
+        note: Disponible en Amazon y también puedes buscarlo en Casa del Libro. Precio de referencia 24,65 €; no hace falta pagar mucho más.
+
+      - id: crochet-barbie
+        name: Crochet for Barbie
+        subtitle: De Nicky Epstein
+        store: Etsy
+        price: 50
+        emoji: 🧶
+        glow: '#e7a6bf'
+        tag: Crochet
+        url: https://www.etsy.com/es/listing/4585155249/ganchillo-para-muneca-barbie-patrones?ls=s&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=crochet+for+barbie+nicky+epstein&ref=sr_gallery-1-1&sr_prefetch=1&pf_from=market&content_source=7a581624-f397-41e8-a9e8-9987a62ba5d1%253ALT9abbd79097a4460bd591a741e67d62274db677e8&organic_search_click=1&logging_key=7a581624-f397-41e8-a9e8-9987a62ba5d1%3ALT9abbd79097a4460bd591a741e67d62274db677e8
+        description: Libro de Nicky Epstein con patrones e instrucciones de crochet para confeccionar prendas y accesorios para muñecas Barbie.
+        uses:
+          - Ampliar el armario de mis Barbies, que al parecer nunca tienen nada que ponerse.
+          - Abrir mi propio atelier de alta costura en miniatura.
+        note: Es difícil de encontrar. Prueba suerte en Vinted, Etsy o Amazon. Si ronda los 50 €, genial; si pasa de 100 €, déjalo escapar, que tampoco es un tesoro de Tutankamón.
+
+      - id: barbie-celebracion-icono
+        name: "Barbie: Celebración de un icono"
+        subtitle: Un libro para mi lado coleccionista
+        store: Amazon
+        price: 33.25
+        emoji: 🎀
+        glow: '#f3a6cd'
+        tag: Barbie
+        url: https://www.amazon.es/Barbie-Celebraci%C3%B3n-icono-oficial-Divulgaci%C3%B3n/dp/8411327434/ref=asc_df_8411327434?mcid=9acd14ef773a311d955f866acccaf4b7&tag=googshopes-21&linkCode=df0&hvadid=705212108328&hvpos=&hvnetw=g&hvrand=2316049932015320426&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9194868&hvtargid=pla-2338166995816&psc=1&hvocijid=2316049932015320426-8411327434-&hvexpln=0
+        description: Libro ilustrado oficial sobre Barbie, su historia, evolución, diseños y relevancia como icono cultural.
+        uses:
+          - Seguir ampliando mis conocimientos sobre Barbie, por pura investigación académica, evidentemente.
+          - Demostrar que coleccionar muñecas también implica documentarse.
+        note: Disponible en Amazon, Casa del Libro y El Corte Inglés. Precio de referencia 33,25 €; compara antes de comprar.
+
+      - id: llanto-muertos
+        name: El llanto de los muertos
+        subtitle: De Camilla Läckberg
+        store: Amazon
+        price: 23.90
+        emoji: 🔎
+        glow: '#b6bfd9'
+        tag: Novela negra
+        url: https://www.amazon.es/llanto-muertos-cr%C3%ADmenes-Fj%C3%A4llbacka-Internacional/dp/8408325531
+        description: Novela negra de Camilla Läckberg, perteneciente a la serie de crímenes de Fjällbacka.
+        uses:
+          - Investigar asesinatos desde el sofá sin tener que levantar ni una huella dactilar.
+          - Seguir alimentando mi obsesión por Camilla Läckberg, mi escritora favorita.
+        note: Disponible en Amazon, Casa del Libro, Fnac y El Corte Inglés. Precio de referencia 23,90 €. Conviene comparar y asegurarse de que es el título correcto.
+
+  - id: barbies
+    name: Barbies
+    emoji: 🎀
+    items:
+      - id: barbie-sleeping-beauty
+        name: Barbie Sleeping Beauty
+        subtitle: La Bella Durmiente
+        store: Vinted / Wallapop
+        price: 70
+        emoji: 👑
+        glow: '#a9c9ee'
+        tag: Princesas
+        url: https://www.vinted.es/items/10178103145-barbie-as-sleeping-beauty
+        description: Muñeca Barbie de colección inspirada en La Bella Durmiente, con vestido de princesa en tonos azules y dorados.
+        uses:
+          - Incorporar otra princesa a mi colección, porque nunca hay suficientes.
+          - Contemplar su vestido mientras calculo dónde demonios voy a colocar otra caja.
+        note: Busca el modelo exacto, preferiblemente nuevo y sin sacar de la caja. Mira en Vinted, Wallapop o eBay. Objetivo 70 €; por encima de 80 €, mejor pensárselo, especialmente si hay que sumar envío.
+
+      - id: barbie-rapunzel
+        name: Barbie Rapunzel
+        subtitle: La de 1997
+        store: Vinted / Wallapop
+        price: 80
+        emoji: 🏰
+        glow: '#e7a6bf'
+        tag: Princesas
+        url: https://www.vinted.es/items/10269573625-barbie-rapunzel-1997-nrfb
+        description: Muñeca Barbie Rapunzel de 1997, con vestido de princesa rosa y larga melena, presentada en su caja original.
+        uses:
+          - Añadir otra joyita noventera a mi colección de Barbies.
+          - Admirar esa melena kilométrica sin tener que desenredarla.
+        note: Buscar en Vinted, Wallapop o eBay. Prioridad absoluta a nueva en caja y al modelo de 1997. Precio objetivo 80 €; si sube mucho más, mejor esperar otra oportunidad.
+
+      - id: barbie-holiday-sweater
+        name: Barbie Holiday Sweater
+        subtitle: Con su jersey navideño
+        store: Mattel Creations
+        price: 34.99
+        emoji: 🎄
+        glow: '#b8d8b0'
+        tag: Navidad
+        url: https://creations.mattel.com/en-es/products/barbie-holiday-sweater-doll-with-long-blonde-hair-jml09
+        description: Muñeca Barbie Holiday Sweater con cabello rubio largo, jersey de temática navideña y pantalones de cuadros.
+        uses:
+          - Darle un toque navideño a mi colección sin ponerle espumillón a todas las Barbies.
+          - Tener otra invitada perfectamente vestida para la cena de Nochebuena.
+        note: Disponible en Mattel Creations por unos 35 €. Ojo con Amazon, que anuncia plazos de entrega de varios meses. Comprobar disponibilidad y fecha real antes de comprar.
+
+  - id: coleccionables
+    name: Coleccionables
+    emoji: 🧸
+    items:
+      - id: minibrands-nevera
+        name: Mini Brands · Nevera
+        subtitle: Electrodomésticos para mis Barbies
+        store: Amazon
+        price: 39.99
+        emoji: 🧊
+        glow: '#a9dcd6'
+        tag: Miniaturas
+        url: https://www.amazon.es/Mini-Brands-Juego-Nevera-c%C3%A1psulas/dp/B0DX78V7BR/ref=asc_df_B0DX78V7BR?mcid=59ad53a82c69397e869515eccbf0c008&tag=googshopes-21&linkCode=df0&hvadid=767368434679&hvpos=&hvnetw=g&hvrand=110088725215738858&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9194868&hvtargid=pla-2440914572310&psc=1&hvocijid=110088725215738858-B0DX78V7BR-&hvexpln=0
+        description: Set de ZURU Mini Brands con una nevera en miniatura y cápsulas sorpresa de productos para coleccionar.
+        uses:
+          - Equipar la cocina de mis Barbies, que llevan años viviendo sin nevera. ¡Una vergüenza!
+          - Organizarles la compra semanal, que vivir de rosa no significa vivir del aire.
+        note: Disponible en Amazon y puedes buscarlo en Juguetilandia o Juguettos. Precio de referencia 39,99 €. Asegúrate de que incluye la nevera y no son solo cápsulas.
+
+      - id: minibrands-bola
+        name: Bola Mini Brands Fashion 4
+        subtitle: Una sorpresa en miniatura
+        store: Amazon
+        price: 19.99
+        emoji: 🛍️
+        glow: '#d4b1ec'
+        tag: Miniaturas
+        url: https://www.amazon.es/Mini-Brands-Fashion-Pack-ZURU/dp/B0FJJB3JNT/ref=asc_df_B0FJJB3JNT?mcid=a81a6edc6cb432d7a9418d32db9a87c6&tag=googshopes-21&linkCode=df0&hvadid=753026056721&hvpos=&hvnetw=g&hvrand=15151347556628006156&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9194868&hvtargid=pla-2449519468529&psc=1&hvocijid=15151347556628006156-B0FJJB3JNT-&hvexpln=0
+        description: Cápsula sorpresa ZURU Mini Brands Fashion Serie 4 con accesorios de moda en miniatura para coleccionar.
+        uses:
+          - Descubrir qué accesorio me toca y poner a prueba mi paciencia de coleccionista.
+          - Darles a mis Barbies más complementos, porque claramente tienen pocos.
+        note: ¡Importante! Quiero la Serie 4, la bola morada. Se puede buscar en Amazon y tiendas de juguetes. Precio de referencia 19,99 €; no pagar un dineral por una sola bola sorpresa.
+
+      - id: mickey-popmart
+        name: Mickey · Boundless Creativity
+        subtitle: De POP MART
+        store: POP MART
+        price: 15
+        emoji: 🐭
+        glow: '#efc494'
+        tag: Disney
+        url: https://es.aliexpress.com/item/1005010664379738.html
+        description: Figura coleccionable de Mickey Mouse de la colección Disney Mickey Mouse Boundless Creativity de POP MART.
+        uses:
+          - Darle otro inquilino a mis estanterías, que todavía queda algún milímetro libre.
+          - Disfrutar del efecto sorpresa, aunque confieso que prefiero saber qué Mickey me va a tocar.
+        note: En AliExpress algunos vendedores permiten elegir la figura concreta, pero comprueba que sea original. Si no, toca visitar POP MART en Gran Vía. Precio de referencia 15 €; en Amazon puede salir bastante más caro.
+
+  - id: otros-caprichos
+    name: Otros caprichos
+    emoji: ✨
+    items:
+      - id: kit-amigurumi-burro
+        name: Kit de amigurumi · Burro
+        subtitle: De Rico Design
+        store: Las Tijeras Mágicas
+        price: 14.49
+        emoji: 🧶
+        glow: '#d3c8bc'
+        tag: Manualidades
+        url: https://www.lastijerasmagicas.com/es/lanas-rico-design/kit-de-amigurumi-donkey-rico-design-10181.html
+        description: Kit de crochet Donkey de Rico Design para tejer un pequeño burro de amigurumi.
+        uses:
+          - Fabricar un burrito adorable con mis propias manos.
+          - Empezar otro proyecto de crochet y fingir que no tengo ninguno pendiente.
+        note: Disponible en Las Tijeras Mágicas por 14,49 €. Busca el kit Donkey de Rico Design y comprueba que sea el modelo del burrito, no otro animal.
+
+      - id: cascos-musica
+        name: Cascos de música
+        subtitle: Para escuchar mis temazos
+        store: Amazon
+        price: 0
+        emoji: 🎧
+        glow: '#b8bfd5'
+        tag: Música
+        url: null
+        description: Auriculares de diadema, cómodos y adecuados para escuchar música y realizar llamadas.
+        uses:
+          - Hablar por teléfono sin que mi gordo diga que me escucha como si estuviera dentro de una cueva.
+        note: Aquí los Reyes tienen libertad para elegir marca y modelo. Solo pido que sean cómodos, tengan buen micrófono y se escuchen bien en llamadas. No hace falta hipotecar Oriente.
+
+      - id: cafetera-bialetti
+        name: Cafetera Bialetti
+        subtitle: La rosa de la carta
+        store: El Corte Inglés
+        price: 59.90
+        emoji: ☕
+        glow: '#f29ac6'
+        tag: Para casa
+        url: https://www.bialetti.com/es_es/moka-express-barbie-3-tazas.html?utm_source=google&utm_medium=pmax&utm_campaign=Cr.Pmax-AO-ES&gad_source=1&gad_campaignid=22073116263&gbraid=0AAAAACjDfwkSy9WX_NTiAKxpP_W7PsrnQ&gclid=Cj0KCQjwrvHWBhDKARIsABmp7h0y2-5r7Oz46v_YXLYluhrPHhJvz1Snc8W0VCpXLJKA2fm3DOeA2wAaAu2tEALw_wcB
+        description: Cafetera italiana Bialetti de color rosa con diseño decorativo estampado.
+        uses:
+          - Prepararme un café digno de una señora adulta y responsable.
+          - Conseguir que hasta mi cafetera combine con mi universo rosa. Lo de madurar ya para otro año.
+        note: Disponible en El Corte Inglés y en la web de Bialetti.
+
+  - id: regalo-estrella
+    name: Regalo estrella
+    emoji: ⭐
+    items:
+      - id: oscar
+        name: Óscar
+        subtitle: Mi esperado perro salchicha
+        store: Criadero
+        price: 0
+        emoji: 🐶
+        glow: '#efbd79'
+        tag: El más deseado
+        url: https://www.teckelsdegolage.com/cachorros-de-teckel/
+        description: Un perro de raza teckel o dachshund, conocido popularmente como perro salchicha.
+        uses:
+          - Convertirme oficialmente en mamá de Óscar y darle todos los mimos del universo.
+          - Tener un compañero de aventuras con cuatro patitas cortas y una personalidad enorme.
+        note: "Queridos Reyes Magos, Óscar lleva varias Navidades en mi carta y aquí seguirá hasta que llegue. Eso sí, es un compromiso de muchos años: nada de compras impulsivas ni de traerlo sin tener todo preparado."

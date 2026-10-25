@@ -76,7 +76,7 @@ def validate_catalog(items, seen=None):
                  ("categoryId", "categoryName", "categoryEmoji")]
         if missing or extra:
             raise CatalogError(f"{label}: campos requeridos faltantes: {missing}; no reconocidos: {extra}.")
-        for field in ("id", "name", "subtitle", "store", "emoji", "glow", "tag", "url", "description", "note"):
+        for field in ("id", "name", "subtitle", "store", "emoji", "glow", "tag", "description", "note"):
             if not isinstance(item[field], str) or not item[field].strip():
                 raise CatalogError(f"{label}: {field} debe ser texto no vacío.")
         item_id = item["id"]
@@ -91,9 +91,12 @@ def validate_catalog(items, seen=None):
             raise CatalogError(f"{label}: uses debe ser una lista no vacía de textos.")
         if not item["glow"].startswith("#") or len(item["glow"]) not in (4, 7) or any(c not in "0123456789abcdefABCDEF" for c in item["glow"][1:]):
             raise CatalogError(f"{label}: glow debe ser un color hexadecimal (#RGB o #RRGGBB).")
-        parsed = urlparse(item["url"])
-        if parsed.scheme != "https" or not parsed.netloc:
-            raise CatalogError(f"{label}: url debe ser una dirección HTTPS completa.")
+        if item["url"] is not None:
+            if not isinstance(item["url"], str) or not item["url"].strip():
+                raise CatalogError(f"{label}: url debe ser null o una dirección HTTPS completa.")
+            parsed = urlparse(item["url"])
+            if parsed.scheme != "https" or not parsed.netloc:
+                raise CatalogError(f"{label}: url debe ser null o una dirección HTTPS completa.")
 
 
 def render_html(items, template):

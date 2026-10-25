@@ -48,8 +48,28 @@ class CatalogBuildTests(unittest.TestCase):
         item = build.load_catalog(CATALOG)[0]
         with self.assertRaisesRegex(build.CatalogError, "HTTPS"):
             build.validate_catalog([dict(item, url="javascript:alert(1)")])
+        with self.assertRaisesRegex(build.CatalogError, "url"):
+            build.validate_catalog([dict(item, url="")])
+        with self.assertRaisesRegex(build.CatalogError, "url"):
+            build.validate_catalog([dict(item, url=42)])
         with self.assertRaisesRegex(build.CatalogError, "color hexadecimal"):
             build.validate_catalog([dict(item, glow="red")])
+
+    def test_null_url_is_valid_and_shop_navigation_is_conditional_in_both_profiles(self):
+        item = dict(build.load_catalog(CATALOG)[0], url=None)
+        build.validate_catalog([item])
+
+        for template_path in (TEMPLATE, ROOT / "cartas" / "2027" / "laura" / "index.html"):
+            with self.subTest(profile=template_path.parent.name):
+                rendered = build.render_html([item], template_path.read_text(encoding="utf-8"))
+                self.assertIn("if (item.url)", rendered)
+                self.assertIn('href = item.url', rendered)
+
+        cayetano = build.render_html([item], TEMPLATE.read_text(encoding="utf-8"))
+        self.assertIn("modalLink.hidden = !item.url", cayetano)
+        self.assertIn("if (item.url) modalLink.href = item.url", cayetano)
+        self.assertRegex(cayetano, r"#modal-link\[hidden\]\s*\{\s*display:\s*none")
+        self.assertIn("i.url || 'Sin enlace de tienda'", cayetano)
 
     def test_yaml_text_is_not_interpreted_as_html_or_script(self):
         item = dict(build.load_catalog(CATALOG)[0],

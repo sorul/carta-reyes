@@ -7,20 +7,58 @@
   <title>Una carta para Laura</title>
   <style>
     :root { color-scheme: light; font-family: Georgia, serif; color: #493647; background: #fff8fb; }
-    body { max-width: 760px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    * { box-sizing: border-box; }
+    body { max-width: 900px; margin: 0 auto; padding: 2rem 1rem 4rem; }
     header { padding: 2rem 0 1rem; border-bottom: 2px solid #f1d6e2; }
     h1 { margin: 0; font-size: clamp(2rem, 8vw, 4rem); color: #9e5277; }
     header p { font: 1rem/1.6 system-ui, sans-serif; max-width: 38rem; }
+    .summary { display: flex; gap: 2rem; padding: 1.2rem 0; font: .95rem system-ui, sans-serif; }
+    .stat { display: grid; gap: .2rem; }
+    .stat strong { color: #9e5277; font: bold 1.4rem Georgia, serif; }
+    .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .section-heading h2 { color: #713c58; }
+    button, .button { border: 1px solid #dba9c0; border-radius: 999px; padding: .55rem .9rem; color: #713c58; background: white; cursor: pointer; font: .9rem system-ui, sans-serif; text-decoration: none; }
+    button:hover, .button:hover { border-color: #9e5277; }
     .filters { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1rem 0; }
-    .chip { border: 1px solid #dba9c0; border-radius: 999px; padding: .45rem .8rem; color: #713c58; background: white; cursor: pointer; }
     .chip.active { background: #9e5277; color: white; }
-    #gifts { display: grid; gap: .8rem; }
-    article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; background: white; border: 1px solid #f1d6e2; border-radius: 1rem; padding: 1rem; }
-    article .emoji { font-size: 2rem; } article h2 { margin: 0 0 .25rem; font-size: 1.15rem; }
-    article p { margin: 0; font: .9rem/1.45 system-ui, sans-serif; }
-    article a { color: #9e5277; font: .9rem system-ui, sans-serif; }
-    footer { margin-top: 1.5rem; color: #765b6b; font: .85rem system-ui, sans-serif; }
-    @media (max-width: 460px) { article { grid-template-columns: auto 1fr; } article a { grid-column: 2; } }
+    .category-nav { display: flex; gap: .6rem; overflow-x: auto; padding: .2rem .1rem .8rem; }
+    .category-link { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .6rem; border: 1px solid #e8c4d4; border-radius: .9rem; padding: .65rem .9rem; color: #713c58; background: #fff; text-decoration: none; font: .9rem system-ui, sans-serif; }
+    .category-link[hidden] { display: none; }
+    .category-link .category-icon { font-size: 1.3rem; }
+    .category-total, .category-heading p { color: #876b7d; font-size: .8rem; }
+    .category-section { margin: 0 0 1.25rem; padding: 1rem; border: 1px solid #f1d6e2; border-radius: 1rem; background: #fffafd; }
+    .category-heading { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; }
+    .category-heading .category-icon { font-size: 1.7rem; }
+    .category-heading h3 { margin: 0; color: #713c58; font-size: 1.25rem; }
+    .category-heading p { margin: .2rem 0 0; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+    .card { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; padding: 1rem; border: 1px solid #f1d6e2; border-radius: 1rem; background: white; transition: border-color .2s, background .2s; }
+    .card.is-bought { border-color: #9e5277; background: #fff0f6; }
+    .card .emoji { font-size: 2rem; }
+    .card h4 { margin: 0 0 .25rem; color: #493647; font-size: 1.1rem; }
+    .card p { margin: 0; font: .9rem/1.45 system-ui, sans-serif; }
+    .card-bottom { display: flex; justify-content: space-between; gap: .6rem; margin-top: .5rem; font: .85rem system-ui, sans-serif; }
+    .price { color: #713c58; font-weight: 700; }
+    .tag { color: #876b7d; }
+    .card-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+    .bought { display: flex; align-items: center; gap: .4rem; margin-top: .7rem; color: #713c58; font: .85rem system-ui, sans-serif; }
+    .note, footer { margin-top: 1.5rem; color: #765b6b; font: .85rem/1.5 system-ui, sans-serif; }
+    dialog { width: min(34rem, calc(100% - 2rem)); border: 1px solid #e8c4d4; border-radius: 1.2rem; padding: 1.4rem; color: #493647; background: #fffafd; }
+    dialog::backdrop { background: #38213088; }
+    .modal-head { display: flex; justify-content: space-between; gap: 1rem; }
+    .modal-head h2 { margin: .2rem 0 .8rem; color: #713c58; }
+    .modal-close { align-self: start; border: 0; font-size: 1.3rem; }
+    .modal-emoji { font-size: 2.6rem; }
+    #modal-description { font: 1rem/1.55 system-ui, sans-serif; }
+    #modal-uses { padding-left: 1.3rem; font: .95rem/1.6 system-ui, sans-serif; }
+    .modal-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    #modal-link[hidden] { display: none; }
+    .toast { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); padding: .75rem 1rem; border-radius: 999px; color: white; background: #713c58; font: .9rem system-ui, sans-serif; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .toast.show { opacity: 1; }
+    @media (max-width: 580px) { body { padding: 1.3rem .8rem 3rem; } .cards { grid-template-columns: 1fr; } .summary { gap: 1rem; } .section-heading { align-items: start; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
   </style>
 </head>
 <body>
@@ -29,46 +67,123 @@
     <h1>Para Laura ✨</h1>
     <p>Un par de ideas pequeñas para compartir momentos bonitos y seguir imaginando juntas.</p>
   </header>
-  <nav class="filters" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></nav>
-  <main id="gifts" aria-live="polite"></main>
-  <footer><span id="count"></span> · Puedes marcar lo que ya llegó; se guarda solo en este navegador.</footer>
+  <section class="summary" aria-label="Resumen de la carta">
+    <div class="stat"><span>Mi carta tiene</span><strong id="count"></strong><span>ideas para compartir</span></div>
+    <div class="stat"><span>Total sin envío</span><strong id="total"></strong><span>Precios orientativos</span></div>
+  </section>
+  <main>
+    <div class="section-heading"><h2>Ideas para compartir</h2><button id="copy" type="button">⧉ Copiar lista</button></div>
+    <nav class="filters" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></nav>
+    <nav class="category-nav" id="category-nav" aria-label="Explorar categorías"></nav>
+    <div id="category-groups" aria-live="polite"></div>
+    <p class="note">✦ Precios orientativos. Los artículos marcados como conseguidos solo se guardan en este navegador, no se sincronizan entre dispositivos.</p>
+  </main>
+  <footer><span id="footer-count"></span> · Puedes marcar lo que ya llegó; se guarda solo en este navegador.</footer>
+  <dialog id="details" aria-labelledby="modal-title">
+    <div class="modal-head"><div><span id="modal-store"></span><h2 id="modal-title"></h2></div><button class="modal-close" id="close" type="button" aria-label="Cerrar">×</button></div>
+    <span class="modal-emoji" id="modal-emoji"></span><p id="modal-description"></p>
+    <h3>¿Por qué lo necesito?</h3><ul id="modal-uses"></ul>
+    <div class="modal-actions"><a id="modal-link" class="button" target="_blank" rel="noopener noreferrer">Ver en la tienda ↗</a><button id="modal-done" type="button">Marcar conseguido</button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
+    'use strict';
     const items = __CATALOG_JSON__;
+    const categories = [...new Map(items.map(item => [item.categoryId || 'ideas', {
+      id: item.categoryId || 'ideas', name: item.categoryName || 'Ideas', emoji: item.categoryEmoji || '✨'
+    }])).values()];
+    const euro = amount => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 }).format(amount);
     const storageKey = 'carta-reyes:2027:laura:conseguidos';
     let obtained = new Set();
     try { obtained = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]')); } catch { obtained = new Set(); }
     let filter = 'all';
-    const list = document.querySelector('#gifts');
+    let selected = null;
+    const categoryNav = document.querySelector('#category-nav');
+    const categoryGroups = document.querySelector('#category-groups');
+    const dialog = document.querySelector('#details');
     function render() {
-      list.replaceChildren();
-      const visible = items.filter(item => filter === 'all' || item.store === filter);
-      visible.forEach(item => {
-        const card = document.createElement('article');
-        const emoji = document.createElement('span');
-        emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true');
-        const details = document.createElement('div');
-        const title = document.createElement('h2'); title.textContent = item.name;
-        const description = document.createElement('p'); description.textContent = item.subtitle + ' · ' + item.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
-        details.append(title, description);
-        const link = document.createElement('a'); link.href = item.url; link.textContent = 'Ver detalle ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer';
-        const label = document.createElement('label');
-        const check = document.createElement('input'); check.type = 'checkbox'; check.checked = obtained.has(item.id);
-        check.addEventListener('change', () => {
-          if (check.checked) obtained.add(item.id); else obtained.delete(item.id);
-          try { localStorage.setItem(storageKey, JSON.stringify([...obtained])); } catch { }
+      categoryNav.replaceChildren();
+      categoryGroups.replaceChildren();
+      categories.forEach(category => {
+        const categoryItems = items.filter(item => (item.categoryId || 'ideas') === category.id &&
+          (filter === 'all' || item.store === filter));
+        if (!categoryItems.length) return;
+        const navigation = document.createElement('a');
+        navigation.className = 'category-link'; navigation.href = `#category-${category.id}`;
+        const navEmoji = document.createElement('span'); navEmoji.className = 'category-icon'; navEmoji.textContent = category.emoji;
+        const navText = document.createElement('span'); navText.textContent = category.name;
+        const navCount = document.createElement('span'); navCount.className = 'category-total';
+        navCount.textContent = `${categoryItems.length} ${categoryItems.length === 1 ? 'idea' : 'ideas'}`;
+        navCount.dataset.categoryCount = '';
+        navigation.append(navEmoji, navText, navCount); categoryNav.append(navigation);
+        const section = document.createElement('section'); section.className = 'category-section';
+        section.id = `category-${category.id}`; section.dataset.category = category.id;
+        const heading = document.createElement('div'); heading.className = 'category-heading';
+        const icon = document.createElement('span'); icon.className = 'category-icon'; icon.textContent = category.emoji;
+        const title = document.createElement('div');
+        const name = document.createElement('h3'); name.textContent = category.name;
+        const count = document.createElement('p'); count.dataset.categoryCount = '';
+        count.textContent = `${categoryItems.length} ${categoryItems.length === 1 ? 'idea' : 'ideas'}`;
+        title.append(name, count); heading.append(icon, title);
+        const cards = document.createElement('div'); cards.className = 'cards';
+        section.append(heading, cards); categoryGroups.append(section);
+        categoryItems.forEach(item => {
+          const card = document.createElement('article');
+          card.className = 'card' + (obtained.has(item.id) ? ' is-bought' : '');
+          const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true');
+          const body = document.createElement('div');
+          const title = document.createElement('h4'); title.textContent = item.name;
+          const description = document.createElement('p'); description.textContent = `${item.subtitle} · ${item.description.split('.')[0]}.`;
+          const bottom = document.createElement('div'); bottom.className = 'card-bottom';
+          const price = document.createElement('span'); price.className = 'price'; price.textContent = euro(item.price);
+          const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; bottom.append(price, tag);
+          const links = document.createElement('div'); links.className = 'card-links';
+          const details = document.createElement('button'); details.type = 'button'; details.textContent = '¿Para qué sirve?'; links.append(details);
+          if (item.url) { const shop = document.createElement('a'); shop.className = 'button'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(shop); }
+          const bought = document.createElement('label'); bought.className = 'bought';
+          const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = obtained.has(item.id);
+          bought.append(checkbox, document.createTextNode(' Ya está conseguido'));
+          body.append(title, description, bottom, links, bought); card.append(emoji, body);
+          details.addEventListener('click', () => openDetail(item));
+          checkbox.addEventListener('change', event => toggle(item.id, event.target.checked));
+          cards.append(card);
         });
-        label.append(check, document.createTextNode(' Conseguido'));
-        card.append(emoji, details, link, label);
-        list.append(card);
       });
-      document.querySelector('#count').textContent = visible.length + ' ideas';
+      document.querySelector('#count').textContent = `${items.length} ideas`;
+      document.querySelector('#footer-count').textContent = `${items.length} ideas`;
+      document.querySelector('#total').textContent = euro(items.reduce((sum, item) => sum + item.price, 0));
     }
-    document.querySelector('.filters').addEventListener('click', event => {
-      const button = event.target.closest('button[data-filter]');
-      if (!button) return;
-      filter = button.dataset.filter;
-      document.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('active', chip === button));
+    function toggle(id, checked) {
+      if (checked) obtained.add(id); else obtained.delete(id);
+      try { localStorage.setItem(storageKey, JSON.stringify([...obtained])); } catch { }
       render();
+    }
+    function openDetail(item) {
+      selected = item;
+      document.querySelector('#modal-store').textContent = `${item.store} · ${euro(item.price)}`;
+      document.querySelector('#modal-title').textContent = item.name;
+      document.querySelector('#modal-emoji').textContent = item.emoji;
+      document.querySelector('#modal-description').textContent = item.description;
+      const uses = document.querySelector('#modal-uses'); uses.replaceChildren();
+      [...item.uses, item.note].forEach(text => { const li = document.createElement('li'); li.textContent = text; uses.append(li); });
+      const modalLink = document.querySelector('#modal-link');
+      modalLink.hidden = !item.url;
+      if (item.url) modalLink.href = item.url; else modalLink.removeAttribute('href');
+      document.querySelector('#modal-done').textContent = obtained.has(item.id) ? 'Desmarcar conseguido' : 'Marcar conseguido';
+      dialog.showModal();
+    }
+    document.querySelector('#modal-done').addEventListener('click', () => { if (!selected) return; toggle(selected.id, !obtained.has(selected.id)); dialog.close(); });
+    document.querySelector('#close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(button => button.classList.remove('active'));
+      chip.classList.add('active'); filter = chip.dataset.filter; render();
+    }));
+    let toastTimeout;
+    function toast(message) { const el = document.querySelector('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('show'), 2600); }
+    document.querySelector('#copy').addEventListener('click', async () => {
+      const text = ['✨ CARTA DE REYES 2027 · LAURA', '', ...items.map(item => `${item.name} — ${euro(item.price)} — ${item.store}\n${item.url || 'Sin enlace de tienda'}`), '', 'Precios orientativos sin envío.'].join('\n');
+      try { await navigator.clipboard.writeText(text); toast('¡Lista copiada! ✨'); } catch { toast('No se pudo copiar automáticamente'); }
     });
     render();
   </script>

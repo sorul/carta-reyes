@@ -141,6 +141,10 @@
       font-size: 12px
     }
 
+    #modal-link[hidden] {
+      display: none
+    }
+
     .hero {
       display: grid;
       grid-template-columns: 1.25fr .75fr;
@@ -955,7 +959,8 @@
         const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = item.tag; bottom.append(price, tag);
         const links = document.createElement('div'); links.className = 'card-links';
         const details = document.createElement('button'); details.className = 'btn details-btn'; details.type = 'button'; details.textContent = '¿Para qué sirve?';
-        const shop = document.createElement('a'); shop.className = 'btn primary'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(details, shop);
+        links.append(details);
+        if (item.url) { const shop = document.createElement('a'); shop.className = 'btn primary'; shop.href = item.url; shop.target = '_blank'; shop.rel = 'noopener noreferrer'; shop.textContent = 'Tienda ↗'; links.append(shop); }
         const bought = document.createElement('label'); bought.className = 'bought'; const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = obtained.has(item.id); bought.append(checkbox, document.createTextNode(' Ya está conseguido'));
         body.append(title, description, bottom, links, bought); card.append(art, body);
         details.addEventListener('click', () => openDetail(item));
@@ -967,14 +972,14 @@
       document.querySelector('#total').textContent = `${euro(items.reduce((sum, i) => sum + i.price, 0))}`;
     }
     function toggle(id, checked) { if (checked) obtained.add(id); else obtained.delete(id); try { localStorage.setItem(storageKey, JSON.stringify([...obtained])); } catch { } render(); }
-    function openDetail(item) { selected = item; document.querySelector('#modal-store').textContent = item.store + ' · ' + euro(item.price); document.querySelector('#modal-title').textContent = item.name; document.querySelector('#modal-emoji').textContent = item.emoji; document.querySelector('#modal-description').textContent = item.description; const ul = document.querySelector('#modal-uses'); ul.replaceChildren();[...item.uses, item.note].forEach(text => { const li = document.createElement('li'); li.textContent = text; ul.append(li); }); document.querySelector('#modal-link').href = item.url; document.querySelector('#modal-done').textContent = obtained.has(item.id) ? 'Desmarcar conseguido' : 'Marcar conseguido'; dialog.showModal(); }
+    function openDetail(item) { selected = item; document.querySelector('#modal-store').textContent = item.store + ' · ' + euro(item.price); document.querySelector('#modal-title').textContent = item.name; document.querySelector('#modal-emoji').textContent = item.emoji; document.querySelector('#modal-description').textContent = item.description; const ul = document.querySelector('#modal-uses'); ul.replaceChildren();[...item.uses, item.note].forEach(text => { const li = document.createElement('li'); li.textContent = text; ul.append(li); }); const modalLink = document.querySelector('#modal-link'); modalLink.hidden = !item.url; if (item.url) modalLink.href = item.url; else modalLink.removeAttribute('href'); document.querySelector('#modal-done').textContent = obtained.has(item.id) ? 'Desmarcar conseguido' : 'Marcar conseguido'; dialog.showModal(); }
     document.querySelector('#modal-done').addEventListener('click', () => { if (!selected) return; toggle(selected.id, !obtained.has(selected.id)); dialog.close(); });
     document.querySelector('#close').addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() });
     document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); filter = chip.dataset.filter; render(); }));
     let toastTimeout;
     function toast(message) { const el = document.querySelector('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('show'), 2600) }
-    document.querySelector('#copy').addEventListener('click', async () => { const text = ['🎄 CARTA DE REYES 2027', '', ...items.map(i => `${i.name} — ${euro(i.price)} — ${i.store}\n${i.url}`), '', 'Precios orientativos sin envío.'].join('\n'); try { await navigator.clipboard.writeText(text); toast('¡Lista copiada! ✨') } catch { toast('No se pudo copiar automáticamente') } });
+    document.querySelector('#copy').addEventListener('click', async () => { const text = ['🎄 CARTA DE REYES 2027', '', ...items.map(i => `${i.name} — ${euro(i.price)} — ${i.store}\n${i.url || 'Sin enlace de tienda'}`), '', 'Precios orientativos sin envío.'].join('\n'); try { await navigator.clipboard.writeText(text); toast('¡Lista copiada! ✨') } catch { toast('No se pudo copiar automáticamente') } });
     render();
   </script>
 </body>
