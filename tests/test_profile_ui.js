@@ -142,6 +142,13 @@ test('Laura card grid keeps the reference 3/2/1 responsive breakpoints', () => {
   assert.match(html, /@media\s*\(max-width:\s*580px\)(?:(?!@media)[\s\S])*?\.art\s*\{\s*height:\s*180px;\s*\}/);
 });
 
+test('Laura hero omits the orbit label and keeps the orb with all three kings', () => {
+  const html = fs.readFileSync(path.join(root, 'cartas/2027/laura/index.html'), 'utf8');
+  assert.doesNotMatch(html, /class="orbit-label"|100% ilusión|un poco de estaño/);
+  assert.match(html, /<div class="orb"><span class="king-group" role="img" aria-label="Tres Reyes Magos">/);
+  assert.equal((html.match(/<span class="king (?:melchior|gaspar|balthazar)" aria-hidden="true">/g) || []).length, 3);
+});
+
 test('Laura topbar and hero match the reference with three accessible kings', () => {
   const html = fs.readFileSync(path.join(root, 'cartas/2027/laura/index.html'), 'utf8');
   assert.match(html, /<header class="topbar">[\s\S]*?Carta de Reyes[\s\S]*?Edición\s*2027[\s\S]*?Ver regalos ↓/);
@@ -169,7 +176,7 @@ test('Laura topbar and hero match the reference with three accessible kings', ()
   assert.match(html, /\.king-crown\s*\{[^}]*grid-row:\s*1[^}]*font-size:\s*\.6em[^}]*align-self:\s*end[^}]*z-index:\s*1/);
   assert.match(html, /\.king-crown\s*\{[^}]*transform:\s*translateY\(\.12em\)/);
   assert.ok(.12 < .18, 'crown overlap remains below the upper-face limit');
-  assert.match(html, /\.king-group\s*\{[^}]*transform:\s*translateY\(16px\)/);
+  assert.match(html, /\.king-group\s*\{[^}]*transform:\s*translateY\(0px\)/);
   assert.match(html, /\.king-face\s*\{[^}]*display:\s*block[^}]*width:\s*100%[^}]*font-size:\s*\.88em[^}]*text-align:\s*center/s);
   assert.ok(.6 / .88 >= .6 && .6 / .88 <= .7, 'crown is 60–70% of portrait face size');
   assert.equal((html.match(/href="#regalos"/g) || []).length, 2);

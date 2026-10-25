@@ -197,7 +197,7 @@
       gap: 0;
       font-size: clamp(50px, 10vw, 120px);
       line-height: 1;
-      transform: translateY(16px);
+      transform: translateY(0px);
       white-space: nowrap;
     }
 
@@ -230,19 +230,6 @@
       align-self: end;
       z-index: 1;
       transform: translateY(.12em);
-    }
-
-    .orbit-label {
-      position: absolute;
-      top: 13%;
-      right: -3%;
-      border: 1px solid #ffc0e1;
-      border-radius: 7px;
-      padding: 10px 14px;
-      color: #4D2E4D;
-      background: #fff0f7;
-      font: 700 12px/1.4 system-ui, sans-serif;
-      transform: rotate(8deg);
     }
 
     .summary {
@@ -715,12 +702,6 @@
         font-size: clamp(50px, 16vw, 88px);
       }
 
-      .orbit-label {
-        right: 0;
-        padding: 8px 10px;
-        font-size: 11px;
-      }
-
       .cards {
         grid-template-columns: 1fr;
       }
@@ -754,17 +735,17 @@
 <body>
   <div class="stars" aria-hidden="true"></div>
   <header class="topbar">
-    <div class="logo"><span class="logo-icon" aria-hidden="true">✳</span><span>Carta de Reyes<br><span class="year">Edición 2027</span></span></div>
+    <div class="logo"><span class="logo-icon" aria-hidden="true">✳</span><span>Carta de Reyes<br><span class="year">Año 2027</span></span></div>
     <a class="pill" href="#regalos">Ver regalos ↓</a>
   </header>
   <section class="hero" aria-labelledby="hero-title">
     <div>
-      <div class="eyebrow">✦ Queridos Reyes Magos (y Laura) ✦</div>
-      <h1 id="hero-title">Este año quiero <em>crear magia.</em></h1>
-      <p>O, para ser más exactos, construir una cámara que reconozca objetos y un pequeño asistente con inteligencia artificial. Esta es mi lista de piezas para convertir la idea en realidad. 🎄 También he pedido libros y juegos: no todo en la vida es crear; también hay espacio para jugar. 🎲</p>
+      <div class="eyebrow">✦ Queridos Reyes Magos (y Cayetano) ✦</div>
+      <h1 id="hero-title">Este año pido un poquito de mi<em> infancia.</em></h1>
+      <p>Esta carta es una mezcla de caprichos, libros y juguetes que me traen bonitos recuerdos. Tranquilos, Reyes, ¡es una wishlist, no hay que traerlo todo! Eso sí, igual os toca abrir una cuenta en Vinted y aprender a regatear ✨</p>
       <div class="hero-actions"><a class="button primary" href="#regalos">Explorar mi carta ↗</a></div>
     </div>
-    <div class="orb"><span class="king-group" role="img" aria-label="Tres Reyes Magos"><span class="king melchior" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔🏼‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king gaspar" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king balthazar" aria-hidden="true"><span class="king-face" aria-hidden="true">👳🏿‍♂️</span></span></span><span class="orbit-label">100% ilusión<br>+ un poco de estaño ✨</span></div>
+    <div class="orb"><span class="king-group" role="img" aria-label="Tres Reyes Magos"><span class="king melchior" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔🏼‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king gaspar" aria-hidden="true"><span class="king-face" aria-hidden="true">🧔‍♂️</span><span class="king-crown" aria-hidden="true">👑</span></span><span class="king balthazar" aria-hidden="true"><span class="king-face" aria-hidden="true">👳🏿‍♂️</span></span></span></div>
   </section>
   <section class="summary" aria-label="Resumen de la carta">
     <div class="stat"><span>Mi carta tiene</span><strong id="count"></strong><span>ideas para compartir</span></div>
