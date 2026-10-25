@@ -1,4 +1,3 @@
-
 categories:
   - id: libros
     name: Libros
@@ -17,7 +16,7 @@ categories:
         uses:
           - Volver a mi infancia sin necesidad de inventar una máquina del tiempo.
           - Recordar cuando mi mayor preocupación era conseguir todos los Pokémon.
-        note: Disponible en Amazon y también puedes buscarlo en Casa del Libro. Precio de referencia 24,65 €; no hace falta pagar mucho más.
+        note: Disponible en Amazon y también puedes buscarlo en Casa del Libro o tiendas Frikis.
 
       - id: crochet-barbie
         name: Crochet for Barbie
@@ -47,7 +46,7 @@ categories:
         uses:
           - Seguir ampliando mis conocimientos sobre Barbie, por pura investigación académica, evidentemente.
           - Demostrar que coleccionar muñecas también implica documentarse.
-        note: Disponible en Amazon, Casa del Libro y El Corte Inglés. Precio de referencia 33,25 €; compara antes de comprar.
+        note: Disponible en Amazon, Casa del Libro y El Corte Inglés.
 
       - id: llanto-muertos
         name: El llanto de los muertos
@@ -60,43 +59,23 @@ categories:
         url: https://www.amazon.es/llanto-muertos-cr%C3%ADmenes-Fj%C3%A4llbacka-Internacional/dp/8408325531
         description: Novela negra de Camilla Läckberg, perteneciente a la serie de crímenes de Fjällbacka.
         uses:
-          - Investigar asesinatos desde el sofá sin tener que levantar ni una huella dactilar.
+          - Investigar asesinatos desde casa.
           - Seguir alimentando mi obsesión por Camilla Läckberg, mi escritora favorita.
-        note: Disponible en Amazon, Casa del Libro, Fnac y El Corte Inglés. Precio de referencia 23,90 €. Conviene comparar y asegurarse de que es el título correcto.
-
-  - id: barbies
-    name: Barbies
-    emoji: 🎀
-    items:
-      - id: barbie-sleeping-beauty
-        name: Barbie Sleeping Beauty
-        subtitle: La Bella Durmiente
-        store: Vinted / Wallapop
-        price: 70
-        emoji: 👑
-        glow: '#a9c9ee'
-        tag: Princesas
-        url: https://www.vinted.es/items/10178103145-barbie-as-sleeping-beauty
-        description: Muñeca Barbie de colección inspirada en La Bella Durmiente, con vestido de princesa en tonos azules y dorados.
+        note: Disponible en Amazon, Casa del Libro, Fnac y El Corte Inglés.
+        
+      - id: todas-las-noches-todas-las-ciudades
+        name: Todas las noches, todas las ciudades
+        subtitle: De Dolores Redondo
+        store: Amazon
+        price: 24.90
+        emoji: 🔎
+        glow: '#b6bfd9'
+        tag: Novela negra
+        url: https://www.amazon.es/s?k=Todas+las+noches+todas+las+ciudades+Dolores+Redondo
+        description: La nueva novela de Dolores Redondo, perteneciente al universo de Los Valles Tranquilos. Un thriller psicológico donde un escritor comienza a creerse el detective de sus propias novelas mientras es investigado por unos asesinatos idénticos a los que ha escrito.
         uses:
-          - Incorporar otra princesa a mi colección, porque nunca hay suficientes.
-          - Contemplar su vestido mientras calculo dónde demonios voy a colocar otra caja.
-        note: Busca el modelo exacto, preferiblemente nuevo y sin sacar de la caja. Mira en Vinted, Wallapop o eBay. Objetivo 70 €; por encima de 80 €, mejor pensárselo, especialmente si hay que sumar envío.
-
-      - id: barbie-rapunzel
-        name: Barbie Rapunzel
-        subtitle: La de 1997
-        store: Vinted / Wallapop
-        price: 80
-        emoji: 🏰
-        glow: '#e7a6bf'
-        tag: Princesas
-        url: https://www.vinted.es/items/10269573625-barbie-rapunzel-1997-nrfb
-        description: Muñeca Barbie Rapunzel de 1997, con vestido de princesa rosa y larga melena, presentada en su caja original.
-        uses:
-          - Añadir otra joyita noventera a mi colección de Barbies.
-          - Admirar esa melena kilométrica sin tener que desenredarla.
-        note: Buscar en Vinted, Wallapop o eBay. Prioridad absoluta a nueva en caja y al modelo de 1997. Precio objetivo 80 €; si sube mucho más, mejor esperar otra oportunidad.
+          - Confirmar que mi afición por la novela negra no tiene cura.
+        note: Publicado el 21 de octubre de 2026. Disponible en Amazon, Casa del Libro, Fnac y El Corte Inglés.
 
       - id: barbie-holiday-sweater
         name: Barbie Holiday Sweater
@@ -110,8 +89,38 @@ categories:
         description: Muñeca Barbie Holiday Sweater con cabello rubio largo, jersey de temática navideña y pantalones de cuadros.
         uses:
           - Darle un toque navideño a mi colección sin ponerle espumillón a todas las Barbies.
-          - Tener otra invitada perfectamente vestida para la cena de Nochebuena.
-        note: Disponible en Mattel Creations por unos 35 €. Ojo con Amazon, que anuncia plazos de entrega de varios meses. Comprobar disponibilidad y fecha real antes de comprar.
+          - Ponerla expuesta junto a mi barbie Holiday Season de 1996. 
+        note: Ojo con Amazon, que anuncia plazos de entrega de varios meses. Comprobar disponibilidad y fecha real antes de comprar.
+
+      - id: barbie-basics-neutral-006
+        name: Barbie Basics You Create 006
+        subtitle: Muñeca y moda, colección Neutrals
+        store: Amazon
+        price: 36.98
+        emoji: 👗
+        glow: '#e7c59b'
+        tag: Barbie Signature
+        url: https://www.amazon.es/Barbie-JJX25-Juguete/dp/B0FHKK3ZHZ/ref=asc_df_B0FHKK3ZHZ?mcid=ec71e6c01b103d5f9338f1651714fad8&tag=googshopes-21&linkCode=df0&hvadid=796585430091&hvpos=&hvnetw=g&hvrand=13683595494998942465&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9194868&hvtargid=pla-2468221256388&hvocijid=13683595494998942465-B0FHKK3ZHZ-&hvexpln=0&th=1
+        description: Barbie Basics modelo 006 de la colección Neutrals 2026, con melena castaña ondulada, cuerpo articulado, top halter y falda midi dorada. Una muñeca de colección con prendas intercambiables para crear diferentes looks.
+        uses:
+          - Darle un toque de glamour a mi colección, que nunca viene mal.
+          - Cambiarle el outfit tantas veces como me dé la gana, porque repetir modelito está sobrevalorado.
+        note: Disponible en Amazon. 
+
+      - id: barbie-look-sweet-tea
+        name: Barbie The Look Sweet Tea
+        subtitle: En busca de mi Barbie gemela
+        store: Vinted
+        price: 150
+        emoji: 💕
+        glow: '#e7a6bf'
+        tag: Mi mini yo
+        url: https://www.vinted.es/items/10336479756-barbie-look-sweet-tea-nrfb
+        description: Barbie de colección The Barbie Look Sweet Tea, lanzada en 2015 y diseñada por Bill Greening. Tiene el pelo castaño ondulado, blusa rosa con volantes, falda floral negra y accesorios para una merienda elegante.
+        uses:
+          - Encontrar por fin una Barbie que se parezca a mí, porque ya va siendo hora de tener mi propia versión en miniatura.
+          - Personalizarla con mis gafas, mi ropa y mis accesorios hasta convertirla en una auténtica mini Laura.
+        note: Modelo DGY08 de 2015, descatalogado. Buscar en Vinted, Wallapop y eBay. Negociar precio, siempre bajan.
 
   - id: coleccionables
     name: Coleccionables
@@ -130,7 +139,7 @@ categories:
         uses:
           - Equipar la cocina de mis Barbies, que llevan años viviendo sin nevera. ¡Una vergüenza!
           - Organizarles la compra semanal, que vivir de rosa no significa vivir del aire.
-        note: Disponible en Amazon y puedes buscarlo en Juguetilandia o Juguettos. Precio de referencia 39,99 €. Asegúrate de que incluye la nevera y no son solo cápsulas.
+        note: Disponible en Amazon y puedes buscarlo en Juguetilandia o Juguettos.
 
       - id: minibrands-bola
         name: Bola Mini Brands Fashion 4
@@ -145,8 +154,7 @@ categories:
         uses:
           - Descubrir qué accesorio me toca y poner a prueba mi paciencia de coleccionista.
           - Darles a mis Barbies más complementos, porque claramente tienen pocos.
-        note: ¡Importante! Quiero la Serie 4, la bola morada. Se puede buscar en Amazon y tiendas de juguetes. Precio de referencia 19,99 €; no pagar un dineral por una sola bola sorpresa.
-
+        note: ¡Importante! Quiero la Serie 4, la bola morada.
       - id: mickey-popmart
         name: Mickey · Boundless Creativity
         subtitle: De POP MART
@@ -159,8 +167,8 @@ categories:
         description: Figura coleccionable de Mickey Mouse de la colección Disney Mickey Mouse Boundless Creativity de POP MART.
         uses:
           - Darle otro inquilino a mis estanterías, que todavía queda algún milímetro libre.
-          - Disfrutar del efecto sorpresa, aunque confieso que prefiero saber qué Mickey me va a tocar.
-        note: En AliExpress algunos vendedores permiten elegir la figura concreta, pero comprueba que sea original. Si no, toca visitar POP MART en Gran Vía. Precio de referencia 15 €; en Amazon puede salir bastante más caro.
+          - Disfrutar del efecto sorpresa.
+        note: En AliExpress algunos vendedores permiten elegir la figura concreta. Si no, toca visitar POP MART en Gran Vía. Precio de referencia 15 €; en Amazon también está disponible.
 
   - id: otros-caprichos
     name: Otros caprichos
@@ -177,9 +185,9 @@ categories:
         url: https://www.lastijerasmagicas.com/es/lanas-rico-design/kit-de-amigurumi-donkey-rico-design-10181.html
         description: Kit de crochet Donkey de Rico Design para tejer un pequeño burro de amigurumi.
         uses:
-          - Fabricar un burrito adorable con mis propias manos.
+          - Fabricar un burrito adorable.
           - Empezar otro proyecto de crochet y fingir que no tengo ninguno pendiente.
-        note: Disponible en Las Tijeras Mágicas por 14,49 €. Busca el kit Donkey de Rico Design y comprueba que sea el modelo del burrito, no otro animal.
+        note: Disponible en Las Tijeras Mágicas.
 
       - id: cascos-musica
         name: Cascos de música
