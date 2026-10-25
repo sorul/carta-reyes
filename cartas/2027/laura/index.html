@@ -20,6 +20,7 @@
     button, .button { border: 1px solid #dba9c0; border-radius: 999px; padding: .55rem .9rem; color: #713c58; background: white; cursor: pointer; font: .9rem system-ui, sans-serif; text-decoration: none; }
     button:hover, .button:hover { border-color: #9e5277; }
     .filters { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1rem 0; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     .chip.active { background: #9e5277; color: white; }
     .category-nav { display: flex; gap: .6rem; overflow-x: auto; padding: .2rem .1rem .8rem; }
     .category-link { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .6rem; border: 1px solid #e8c4d4; border-radius: .9rem; padding: .65rem .9rem; color: #713c58; background: #fff; text-decoration: none; font: .9rem system-ui, sans-serif; }
@@ -34,6 +35,7 @@
     .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
     .card { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; padding: 1rem; border: 1px solid #f1d6e2; border-radius: 1rem; background: white; transition: border-color .2s, background .2s; }
     .card.is-bought { border-color: #9e5277; background: #fff0f6; }
+    .card .emoji-glow { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: radial-gradient(circle at 50% 47%, var(--glow), transparent 65%); }
     .card .emoji { font-size: 2rem; }
     .card h4 { margin: 0 0 .25rem; color: #493647; font-size: 1.1rem; }
     .card p { margin: 0; font: .9rem/1.45 system-ui, sans-serif; }
@@ -73,9 +75,10 @@
   </section>
   <main>
     <div class="section-heading"><h2>Ideas para compartir</h2><button id="copy" type="button">⧉ Copiar lista</button></div>
-    <nav class="filters" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></nav>
+    <div class="filters" role="group" aria-label="Filtrar por tienda"><!-- STORE_FILTERS --></div>
+    <p class="visually-hidden" id="filter-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <nav class="category-nav" id="category-nav" aria-label="Explorar categorías"></nav>
-    <div id="category-groups" aria-live="polite"></div>
+    <div id="category-groups"></div>
     <p class="note">✦ Precios orientativos. Los artículos marcados como conseguidos solo se guardan en este navegador, no se sincronizan entre dispositivos.</p>
   </main>
   <footer><span id="footer-count"></span> · Puedes marcar lo que ya llegó; se guarda solo en este navegador.</footer>
@@ -130,7 +133,8 @@
         categoryItems.forEach(item => {
           const card = document.createElement('article');
           card.className = 'card' + (obtained.has(item.id) ? ' is-bought' : '');
-          const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true');
+          const emojiGlow = document.createElement('span'); emojiGlow.className = 'emoji-glow'; emojiGlow.style.setProperty('--glow', item.glow);
+          const emoji = document.createElement('span'); emoji.className = 'emoji'; emoji.textContent = item.emoji; emoji.setAttribute('aria-hidden', 'true'); emojiGlow.append(emoji);
           const body = document.createElement('div');
           const title = document.createElement('h4'); title.textContent = item.name;
           const description = document.createElement('p'); description.textContent = `${item.subtitle} · ${item.description.split('.')[0]}.`;
@@ -143,7 +147,7 @@
           const bought = document.createElement('label'); bought.className = 'bought';
           const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = obtained.has(item.id);
           bought.append(checkbox, document.createTextNode(' Ya está conseguido'));
-          body.append(title, description, bottom, links, bought); card.append(emoji, body);
+          body.append(title, description, bottom, links, bought); card.append(emojiGlow, body);
           details.addEventListener('click', () => openDetail(item));
           checkbox.addEventListener('change', event => toggle(item.id, event.target.checked));
           cards.append(card);
@@ -176,9 +180,18 @@
     document.querySelector('#close').addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => {
+      if (chip.dataset.filter === filter) return;
       document.querySelectorAll('.chip').forEach(button => button.classList.remove('active'));
-      chip.classList.add('active'); filter = chip.dataset.filter; render();
+      chip.classList.add('active'); filter = chip.dataset.filter; render(); announceFilterResults();
     }));
+    function announceFilterResults() {
+      const count = items.filter(item => filter === 'all' || item.store === filter).length;
+      const message = filter === 'all'
+        ? `${count === 1 ? 'Se muestra' : 'Se muestran'} ${count} ${count === 1 ? 'regalo' : 'regalos'} en todas las tiendas.`
+        : count === 0 ? `No hay regalos de ${filter}.`
+          : `${count === 1 ? 'Se muestra' : 'Se muestran'} ${count} ${count === 1 ? 'regalo' : 'regalos'} de ${filter}.`;
+      document.querySelector('#filter-status').textContent = message;
+    }
     let toastTimeout;
     function toast(message) { const el = document.querySelector('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('show'), 2600); }
     document.querySelector('#copy').addEventListener('click', async () => {

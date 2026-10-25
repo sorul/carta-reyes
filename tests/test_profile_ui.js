@@ -7,14 +7,14 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const profiles = ['cayetano', 'laura'];
 const fixtures = [
-  { id: 'book', name: 'Libro', subtitle: 'Leer juntas', price: 12, store: 'Tienda A', url: 'https://example.test/book', emoji: '📚', categoryId: 'ideas', categoryName: 'Ideas', categoryEmoji: '✨', glow: '#fff', tag: 'Lectura', description: 'Un libro especial.', uses: ['Leer historias'], note: 'Para compartir.' },
-  { id: 'game', name: 'Juego', subtitle: 'Jugar juntas', price: 8.5, store: 'Tienda B', url: null, emoji: '🎲', categoryId: 'ideas', categoryName: 'Ideas', categoryEmoji: '✨', glow: '#fff', tag: 'Juego', description: 'Un juego bonito.', uses: ['Jugar en familia'], note: 'Sin enlace.' },
-  { id: 'paint', name: 'Pinturas', subtitle: 'Crear juntas', price: 5, store: 'Tienda A', url: 'https://example.test/paint', emoji: '🎨', categoryId: 'crear', categoryName: 'Crear', categoryEmoji: '🎨', glow: '#fff', tag: 'Arte', description: 'Pinturas lavables.', uses: ['Pintar'], note: 'Fáciles de limpiar.' },
+  { id: 'book', name: 'Libro', subtitle: 'Leer juntas', price: 12, store: 'Tienda A', url: 'https://example.test/book', emoji: '📚', categoryId: 'ideas', categoryName: 'Ideas', categoryEmoji: '✨', glow: '#ff0000', tag: 'Lectura', description: 'Un libro especial.', uses: ['Leer historias'], note: 'Para compartir.' },
+  { id: 'game', name: 'Juego', subtitle: 'Jugar juntas', price: 8.5, store: 'Tienda B', url: null, emoji: '🎲', categoryId: 'ideas', categoryName: 'Ideas', categoryEmoji: '✨', glow: '#00ff00', tag: 'Juego', description: 'Un juego bonito.', uses: ['Jugar en familia'], note: 'Sin enlace.' },
+  { id: 'paint', name: 'Pinturas', subtitle: 'Crear juntas', price: 5, store: 'Tienda A', url: 'https://example.test/paint', emoji: '🎨', categoryId: 'crear', categoryName: 'Crear', categoryEmoji: '🎨', glow: '#0000ff', tag: 'Arte', description: 'Pinturas lavables.', uses: ['Pintar'], note: 'Fáciles de limpiar.' },
 ];
 
 class Element {
   constructor(tag = 'div') {
-    this.tagName = tag.toUpperCase(); this.children = []; this.dataset = {}; this.style = { setProperty() {} };
+    this.tagName = tag.toUpperCase(); this.children = []; this.dataset = {}; this.style = { properties: new Map(), setProperty(name, value) { this.properties.set(name, value); } };
     this.attributes = {}; this.listeners = {}; this.className = ''; this.hidden = false; this.checked = false;
     this.classList = { add: name => { this.className = `${this.className} ${name}`.trim(); }, remove: name => { this.className = this.className.split(' ').filter(x => x !== name).join(' '); }, toggle: (name, force) => { if (force) this.classList.add(name); else this.classList.remove(name); } };
   }
@@ -38,7 +38,7 @@ class Element {
 function runProfile(profile, clipboardFailure = false) {
   const html = fs.readFileSync(path.join(root, `cartas/2027/${profile}/index.html`), 'utf8');
   const script = html.match(/<script>([\s\S]*?)<\/script>/)[1].replace('__CATALOG_JSON__', JSON.stringify(fixtures));
-  const selectors = ['#gifts', '#count', '.filters', '#category-nav', '#category-groups', '#total', '#details', '#modal-store', '#modal-title', '#modal-emoji', '#modal-description', '#modal-uses', '#modal-link', '#modal-done', '#close', '#copy', '#toast'];
+  const selectors = ['#gifts', '#count', '.filters', '#category-nav', '#category-groups', '#filter-status', '#total', '#details', '#modal-store', '#modal-title', '#modal-emoji', '#modal-description', '#modal-uses', '#modal-link', '#modal-done', '#close', '#copy', '#toast'];
   const elements = new Map(selectors.map(selector => [selector, new Element(selector.startsWith('#') ? 'div' : 'nav')]));
   const toastAttributes = html.match(/<[^>]*id="toast"[^>]*>/)?.[0] || '';
   const toastRole = toastAttributes.match(/role="([^"]+)"/)?.[1];
@@ -48,7 +48,12 @@ function runProfile(profile, clipboardFailure = false) {
   const groupsAttributes = html.match(/<[^>]*id="category-groups"[^>]*>/)?.[0] || '';
   const groupsLive = groupsAttributes.match(/aria-live="([^"]+)"/)?.[1];
   if (groupsLive) elements.get('#category-groups').setAttribute('aria-live', groupsLive);
-  for (const filter of ['all', 'Tienda A', 'Tienda B']) { const button = new Element('button'); button.dataset.filter = filter; button.className = 'chip'; elements.get('.filters').append(button); }
+  const statusAttributes = html.match(/<[^>]*id="filter-status"[^>]*>/)?.[0] || '';
+  for (const attribute of ['role', 'aria-atomic', 'aria-live']) {
+    const value = statusAttributes.match(new RegExp(`${attribute}="([^"]+)"`))?.[1];
+    if (value) elements.get('#filter-status').setAttribute(attribute, value);
+  }
+  for (const filter of ['all', 'Tienda A', 'Tienda B', 'Tienda C']) { const button = new Element('button'); button.dataset.filter = filter; button.className = 'chip'; elements.get('.filters').append(button); }
   const document = {
     querySelector: selector => elements.get(selector) || new Element(),
     querySelectorAll: selector => selector === '.chip' ? elements.get('.filters').children : [],
@@ -73,6 +78,19 @@ test('Laura template exposes the same interactive catalog behavior as Cayetano',
     await ui.elements.get('.filters').children[2].fire('click');
     assert.equal(groups.children.length, 1, `${profile}: empty category is omitted after filtering`);
     assert.match(groups.children[0].textContent, /1 (?:regalo|idea)/);
+  }
+});
+
+test('both profiles apply each catalog item glow to its rendered visual', () => {
+  for (const profile of profiles) {
+    const ui = runProfile(profile);
+    const cards = findAll(ui.elements.get('#category-groups'), node => node.tagName === 'ARTICLE');
+    assert.equal(cards.length, fixtures.length, `${profile}: every fixture item renders a card`);
+    cards.forEach((card, index) => {
+      const glowTarget = find(card, node => node.style?.properties?.has('--glow'));
+      assert.ok(glowTarget, `${profile}: ${fixtures[index].id} has a glow visual`);
+      assert.equal(glowTarget.style.properties.get('--glow'), fixtures[index].glow, `${profile}: ${fixtures[index].id} uses its own glow color`);
+    });
   }
 });
 
@@ -113,9 +131,43 @@ test('clipboard failure is announced accessibly for both profiles', async () => 
   }
 });
 
-test('Laura preserves polite result announcements and reduced-motion support', () => {
-  const ui = runProfile('laura');
-  assert.equal(ui.elements.get('#category-groups').getAttribute('aria-live'), 'polite', 'only catalog results announce rerenders');
+test('filter status announces only user-selected store result changes', async () => {
+  for (const profile of profiles) {
+    const ui = runProfile(profile);
+    const html = fs.readFileSync(path.join(root, `cartas/2027/${profile}/index.html`), 'utf8');
+    const status = ui.elements.get('#filter-status');
+    const buttons = ui.elements.get('.filters').children;
+    assert.equal(status.textContent, '', `${profile}: status starts empty`);
+    assert.equal(status.getAttribute('role'), 'status', `${profile}: status is an accessible status region`);
+    assert.equal(status.getAttribute('aria-atomic'), 'true', `${profile}: the announcement is atomic`);
+    assert.equal(ui.elements.get('#category-groups').getAttribute('aria-live'), null, `${profile}: catalog rerenders are quiet`);
+    const statusElement = html.match(/<[^>]*id="filter-status"[^>]*>/)?.[0] || '';
+    assert.match(statusElement, /class="visually-hidden"/, `${profile}: status is visually hidden without being removed from accessibility`);
+    assert.match(statusElement, /aria-atomic="true"/);
+    assert.match(html, /class="(?:filters|filterbar)" role="group" aria-label="Filtrar por tienda"/, `${profile}: store filters are grouped controls`);
+    const visuallyHiddenCss = html.match(/\.visually-hidden\s*\{([^}]*)\}/)?.[1] || '';
+    assert.match(visuallyHiddenCss, /position:\s*absolute/i);
+    assert.doesNotMatch(visuallyHiddenCss, /display:\s*none|visibility:\s*hidden/i);
+
+    await buttons[1].fire('click');
+    assert.equal(status.textContent, 'Se muestran 2 regalos de Tienda A.');
+    await buttons[1].fire('click');
+    assert.equal(status.textContent, 'Se muestran 2 regalos de Tienda A.', `${profile}: same-filter clicks do not announce again`);
+    await buttons[2].fire('click');
+    assert.equal(status.textContent, 'Se muestra 1 regalo de Tienda B.');
+    const beforeObtainedToggle = status.textContent;
+    const card = ui.elements.get('#category-groups').children[0].children.find(child => child.className === 'cards').children[0];
+    const checkbox = find(card, node => node.tagName === 'INPUT');
+    await checkbox.fire('change', { target: { checked: true } });
+    assert.equal(status.textContent, beforeObtainedToggle, `${profile}: obtained-state rerenders do not announce`);
+    await buttons[3].fire('click');
+    assert.equal(status.textContent, 'No hay regalos de Tienda C.');
+    await buttons[0].fire('click');
+    assert.equal(status.textContent, 'Se muestran 3 regalos en todas las tiendas.');
+  }
+});
+
+test('Laura preserves reduced-motion support', () => {
   const html = fs.readFileSync(path.join(root, 'cartas/2027/laura/index.html'), 'utf8');
   const reducedMotion = html.match(/@media\s*\(prefers-reduced-motion:\s*reduce\)([\s\S]*?)<\/style>/)?.[1] || '';
   assert.match(reducedMotion, /transition:\s*none\s*!important/i);
