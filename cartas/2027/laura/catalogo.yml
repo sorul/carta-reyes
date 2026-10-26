@@ -18,21 +18,6 @@ categories:
           - Recordar cuando mi mayor preocupación era conseguir todos los Pokémon.
         note: Disponible en Amazon y también puedes buscarlo en Casa del Libro o tiendas Frikis.
 
-      - id: crochet-barbie
-        name: Crochet for Barbie
-        subtitle: De Nicky Epstein
-        store: Etsy
-        price: 50
-        emoji: 🧶
-        glow: '#e7a6bf'
-        tag: Crochet
-        url: https://www.etsy.com/es/listing/4585155249/ganchillo-para-muneca-barbie-patrones?ls=s&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=crochet+for+barbie+nicky+epstein&ref=sr_gallery-1-1&sr_prefetch=1&pf_from=market&content_source=7a581624-f397-41e8-a9e8-9987a62ba5d1%253ALT9abbd79097a4460bd591a741e67d62274db677e8&organic_search_click=1&logging_key=7a581624-f397-41e8-a9e8-9987a62ba5d1%3ALT9abbd79097a4460bd591a741e67d62274db677e8
-        description: Libro de Nicky Epstein con patrones e instrucciones de crochet para confeccionar prendas y accesorios para muñecas Barbie.
-        uses:
-          - Ampliar el armario de mis Barbies, que al parecer nunca tienen nada que ponerse.
-          - Abrir mi propio atelier de alta costura en miniatura.
-        note: Es difícil de encontrar. Prueba suerte en Vinted, Etsy o Amazon. Si ronda los 50 €, genial; si pasa de 100 €, déjalo escapar, que tampoco es un tesoro de Tutankamón.
-
       - id: barbie-celebracion-icono
         name: "Barbie: Celebración de un icono"
         subtitle: Un libro para mi lado coleccionista
@@ -206,21 +191,6 @@ categories:
         uses:
           - Hablar por teléfono sin que mi gordo diga que me escucha como si estuviera dentro de una cueva.
         note: Aquí los Reyes tienen libertad para elegir marca y modelo. Solo pido que sean cómodos, tengan buen micrófono y se escuchen bien en llamadas. No hace falta hipotecar Oriente.
-
-      - id: cafetera-bialetti
-        name: Cafetera Bialetti
-        subtitle: La rosa de la carta
-        store: El Corte Inglés
-        price: 59.90
-        emoji: ☕
-        glow: '#f29ac6'
-        tag: Para casa
-        url: https://www.bialetti.com/es_es/moka-express-barbie-3-tazas.html?utm_source=google&utm_medium=pmax&utm_campaign=Cr.Pmax-AO-ES&gad_source=1&gad_campaignid=22073116263&gbraid=0AAAAACjDfwkSy9WX_NTiAKxpP_W7PsrnQ&gclid=Cj0KCQjwrvHWBhDKARIsABmp7h0y2-5r7Oz46v_YXLYluhrPHhJvz1Snc8W0VCpXLJKA2fm3DOeA2wAaAu2tEALw_wcB
-        description: Cafetera italiana Bialetti de color rosa con diseño decorativo estampado.
-        uses:
-          - Prepararme un café digno de una señora adulta y responsable.
-          - Conseguir que hasta mi cafetera combine con mi universo rosa. Lo de madurar ya para otro año.
-        note: Disponible en El Corte Inglés y en la web de Bialetti.
 
   - id: regalo-estrella
     name: Regalo estrella
