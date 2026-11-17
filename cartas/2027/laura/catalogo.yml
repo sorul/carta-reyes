@@ -174,8 +174,22 @@ categories:
         url: https://www.instagram.com/p/DeQuqj5CBqE/
         description: Tamagotchi Paradise Neon Planets. Una versión mucho más completa que el Gen 1 que ya tengo, en la que puedes explorar planetas, criar personajes, descubrir evoluciones y formar nuevas generaciones.
         uses:
-          - Hablar por teléfono sin que mi gordo diga que me escucha como si estuviera dentro de una cueva.
+          - Criar bichitos :)
         note: Sale el 21 de noviembre de 2026.
+
+      - id: funda-tamagotchi-neon-planets
+        name: Funda glitter transparente Tamagotchi Paradise
+        subtitle: Si me traen un Tamagotchi grande, ¡tendré que protegerlo de arañazos y caídas!
+        store: Amazon
+        price: 0
+        emoji: 🥚
+        glow: '#b9a5f5'
+        tag: Juguetes
+        url: https://www.amazon.es/protectora-compatible-Tamagotchi-policarbonato-transparente/dp/B0H4K1R24X/ref=sr_1_30?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2XNH6XJQ2FUBZ&dib=eyJ2IjoiMSJ9.GnESp-C68FiLHCH3Mwayhu_-q1ekuIto2VQVjuljLS0z6tBjJ31LtnKhHe-Kq0WdzHow49Q_6GfDOgCOmz1ALUi-qb92YOhZf5GwQI_3TQFzhy4OuprK-6_t4KVqX8W3IrQ72AR_a1ySCwAK6gbEuUNph7MJaWm3bnJ4F-RSEnywkpyeyAQ6oW-Gwy9mViwlRzk_cgV3TIluBhs-APc1Upjjw3_zX5jpYxbBtcXOM8ump826HNdD_7PE1d_6JnfDRyi62RahqVux4Q5hDwht_RscM7TplEznt0I0A05VOrI.vV6CY6_CzZUoRQ3R7Rlv4P0ii3t7DlxjuH3AzeNxt_M&dib_tag=se&keywords=tamagotchi%2Bparadise%2Bfunda%2By%2Bestuche&qid=1794939938&refinements=p_72%3A831280031&rnid=831271031&s=toys&sprefix=tamagotchi%2Bparadise%2Bfunda%2By%2Bestuche%2Ctoys%2C77&sr=1-30&th=1
+        description: Funda para Tamagotchi Paradise Neon Planets.
+        uses:
+          - Proteger a mis bichitos de mis propias torpezas, que bastante tienen ya con depender de mí.
+        note: Esto es un ejemplo. Los reyes pueden seleccionar la funda que más les guste.
 
   - id: regalo-estrella
     name: Regalo estrella
