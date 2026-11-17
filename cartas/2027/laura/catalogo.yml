@@ -163,19 +163,19 @@ categories:
           - Empezar otro proyecto de crochet y fingir que no tengo ninguno pendiente.
         note: Disponible en Las Tijeras Mágicas.
 
-      - id: cascos-musica
-        name: Cascos de música
-        subtitle: Para escuchar mis temazos
-        store: Amazon
+      - id: tamagotchi-neon-planets
+        name: Tamagotchi Paradise Neon Planets
+        subtitle: Porque ahora quiero criar bichitos por todo el universo
+        store: Por determinar
         price: 0
-        emoji: 🎧
-        glow: '#b8bfd5'
-        tag: Música
-        url: null
-        description: Auriculares de diadema, cómodos y adecuados para escuchar música y realizar llamadas.
+        emoji: 🥚
+        glow: '#b9a5f5'
+        tag: Juguetes
+        url: https://www.instagram.com/p/DeQuqj5CBqE/
+        description: Tamagotchi Paradise Neon Planets. Una versión mucho más completa que el Gen 1 que ya tengo, en la que puedes explorar planetas, criar personajes, descubrir evoluciones y formar nuevas generaciones.
         uses:
           - Hablar por teléfono sin que mi gordo diga que me escucha como si estuviera dentro de una cueva.
-        note: Aquí los Reyes tienen libertad para elegir marca y modelo. Solo pido que sean cómodos, tengan buen micrófono y se escuchen bien en llamadas. No hace falta hipotecar Oriente.
+        note: Sale el 21 de noviembre de 2026.
 
   - id: regalo-estrella
     name: Regalo estrella
