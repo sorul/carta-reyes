@@ -191,6 +191,19 @@ categories:
           - Proteger a mis bichitos de mis propias torpezas, que bastante tienen ya con depender de mí.
         note: Esto es un ejemplo. Los reyes pueden seleccionar la funda que más les guste.
 
+      - id: funko-cheshire-cat-special-edition
+        name: Funko Pop! Cheshire Cat Special Edition 1199
+        subtitle: Mi personaje favorito de Disney. Y encima se hace el difícil de conseguir.
+        store: Tienda de sevilla
+        price: 25.99€
+        emoji: 😼
+        glow: '#d89adf'
+        tag: Juguetes
+        url: https://playntoy.es/funko-pop-cheshire-de-pie-sobre-la-cabeza/
+        uses:
+          - Vigilar la estantería nueva.
+        note: Lo vi en una tienda de Sevilla, pero parece agotado en casi todas partes. Si los Reyes lo encuentran, que lo atrapen antes de que desaparezca otra vez.
+
   - id: regalo-estrella
     name: Regalo estrella
     emoji: ⭐
